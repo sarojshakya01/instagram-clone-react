@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Story from "./Story/Story";
+import SidePanel from "./SidePanel/SidePanel";
 import Post from "./Post/Post";
 import "./Main.css";
 /*
@@ -65,10 +66,37 @@ class Main extends React.Component {
       posts: [],
       stories: [],
       fetchedStory: false,
+      style: {
+        left: "0px",
+      },
     };
   }
 
+  handleResize = () => {
+    const element = document.getElementById("igpost-main");
+    const leftPos = element.getBoundingClientRect().left + window.scrollX;
+
+    const myStyle = {
+      left: (leftPos + 642).toString() + "px",
+    };
+    this.setState(() => ({
+      style: myStyle,
+    }));
+  };
+
   componentDidMount = () => {
+    window.addEventListener("resize", this.handleResize);
+    const element = document.getElementById("igpost-main");
+    const leftPos = element.getBoundingClientRect().left + window.scrollX;
+
+    const myStyle = {
+      left: (leftPos + 642).toString() + "px",
+    };
+
+    this.setState(() => ({
+      style: myStyle,
+    }));
+
     let that = this;
     let tempPosts = [];
     const imgUrl = "../../img/userdata/";
@@ -124,16 +152,34 @@ class Main extends React.Component {
     });
   };
 
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.handleResize);
+  };
+
   render() {
     return (
       <main role="main" className="dark-need">
-        <section className="main-section">
-          <Story
-            fetched={this.state.fetchedStory}
-            stories={this.state.stories}
-          />
-          <Post posts={this.state.posts} />
-        </section>
+        {window.innerWidth <= 1000 ? (
+          <section className="main-section">
+            <Story
+              fetched={this.state.fetchedStory}
+              stories={this.state.stories}
+            />
+            <Post posts={this.state.posts} />
+          </section>
+        ) : (
+          <section className="main-section-2">
+            <Post posts={this.state.posts} />
+            <div className="post-story-gap"></div>
+            <SidePanel
+              style={this.state.style}
+              fetched={this.state.fetchedStory}
+              profileInfo={this.props.profileInfo}
+              stories={this.state.stories}
+            />
+          </section>
+        )}
+
         <div>
           <form encType="multipart/form-data" method="POST" role="presentation">
             <input

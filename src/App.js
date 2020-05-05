@@ -66,7 +66,7 @@ class App extends React.Component {
     return (
       <div className="root-inner">
         <div></div>
-        <Main />
+        <Main profileInfo={this.state.loginUser} />
         <Nav
           profileInfo={this.state.loginUser}
           changeTheme={this.changeTheme}

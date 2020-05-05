@@ -44,7 +44,7 @@ class Post extends React.Component {
   };
   render() {
     return (
-      <div className="">
+      <div id="igpost-main" className="igpost-outer">
         <div className="">
           <div className="igpost-container">{this.renderPosts()}</div>
         </div>

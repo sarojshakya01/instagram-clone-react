@@ -16,10 +16,10 @@ class Nav extends React.Component {
               <Brand />
               <Search />
               <Icons profileInfo={this.props.profileInfo} />
-              <SwitchTheme
+              {/* <SwitchTheme
                 changeTheme={this.props.changeTheme}
                 label={this.props.label}
-              />
+              /> */}
             </div>
           </div>
         </div>

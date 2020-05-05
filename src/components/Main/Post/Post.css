@@ -5,6 +5,13 @@ a:visited {
   text-decoration: none;
 }
 
+.main-section-2 .igpost-outer {
+  float: left;
+  margin-right: 28px;
+  max-width: 614px;
+  width: 100%;
+}
+
 .igpost-container {
   flex-direction: column;
   padding-bottom: 0px;
