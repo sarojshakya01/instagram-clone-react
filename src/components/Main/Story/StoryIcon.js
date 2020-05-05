@@ -9,7 +9,7 @@ class StoryIcon extends React.Component {
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "#ff0000";
-      ctx.arc(22, 22, 20, 0, 2 * Math.PI);
+      ctx.arc(33, 33, 31, 0, 2 * Math.PI);
       ctx.stroke();
     }
   };

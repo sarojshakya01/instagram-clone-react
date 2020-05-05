@@ -9,10 +9,23 @@ class SidePanel extends React.Component {
   render() {
     return (
       <div className="side-panel" style={this.props.style}>
-        <ProfilePanel profileInfo={this.props.profileInfo} />
-        <StoryPanel stories={this.props.stories} />
-        <SuggestionPanel suggestions={this.props.suggestions} />
-        <FooterPanel />
+        {!this.props.fetchedStory || !this.props.fetchedSuggestion ? (
+          <div className="story-loader">
+            <img
+              alt="Loading..."
+              src="../../img/loader.gif"
+              height="32"
+              width="32"
+            />
+          </div>
+        ) : (
+          <>
+            <ProfilePanel profileInfo={this.props.profileInfo} />
+            <StoryPanel stories={this.props.stories} />
+            <SuggestionPanel suggestions={this.props.suggestions} />
+            <FooterPanel />
+          </>
+        )}
       </div>
     );
   }

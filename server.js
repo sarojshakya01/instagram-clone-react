@@ -5,9 +5,9 @@ const app = express();
 
 const router = express.Router();
 
-// const uri = "mongodb+srv://sarojsh:sarojsh@cluster0-jb3wc.gcp.mongodb.net/";
+const uri = "mongodb+srv://sarojsh:sarojsh@cluster0-jb3wc.gcp.mongodb.net/";
 
-const uri = "mongodb://127.0.0.1:27017/";
+// const uri = "mongodb://127.0.0.1:27017/";
 
 const mongocli = mongo.MongoClient;
 

@@ -91,7 +91,7 @@ class App extends React.Component {
           changeTheme={this.changeTheme}
           label={darkLabel}
         />
-        <Footer />
+        {window.innerWidth <= 1056 ? <Footer /> : null}
       </div>
     );
   }

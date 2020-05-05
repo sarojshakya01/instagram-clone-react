@@ -48,7 +48,7 @@ class Post extends React.Component {
         <div className="">
           <div className="igpost-container">{this.renderPosts()}</div>
         </div>
-        <PostFooter />
+        {!this.props.fetchedPost ? <PostFooter /> : null}
       </div>
     );
   }

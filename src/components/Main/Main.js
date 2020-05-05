@@ -12,7 +12,9 @@ class Main extends React.Component {
       posts: [],
       stories: [],
       suggestions: [],
+      fetchedPost: false,
       fetchedStory: false,
+      fetchedSuggestion: false,
       style: {
         left: "0px",
       },
@@ -79,6 +81,7 @@ class Main extends React.Component {
       });
       that.setState(() => ({
         posts: tempPosts,
+        fetchedPost: true,
       }));
     });
 
@@ -134,7 +137,7 @@ class Main extends React.Component {
         }
         that.setState(() => ({
           suggestions: tempSuggestions,
-          fetchedStory: true,
+          fetchedSuggestion: true,
         }));
       });
   };
@@ -152,15 +155,22 @@ class Main extends React.Component {
               fetched={this.state.fetchedStory}
               stories={this.state.stories}
             />
-            <Post posts={this.state.posts} />
+            <Post
+              fetchedPost={this.state.fetchedPost}
+              posts={this.state.posts}
+            />
           </section>
         ) : (
           <section className="main-section-2">
-            <Post posts={this.state.posts} />
+            <Post
+              fetchedPost={this.state.fetchedPost}
+              posts={this.state.posts}
+            />
             <div className="post-story-gap"></div>
             <SidePanel
               style={this.state.style}
-              fetched={this.state.fetchedStory}
+              fetchedStory={this.state.fetchedStory}
+              fetchedSuggestion={this.state.fetchedSuggestion}
               profileInfo={this.props.profileInfo}
               stories={this.state.stories}
               suggestions={this.state.suggestions}

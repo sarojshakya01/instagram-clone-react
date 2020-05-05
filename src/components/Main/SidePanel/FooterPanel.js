@@ -49,7 +49,7 @@ const FooterPanel = () => {
         </ul>
       </nav>
       <span className="copyright">
-        {"© " + year + " Instagram from Saroj Shakya"}
+        {"© " + year + " Instagram by Saroj Shakya"}
       </span>
     </div>
   );
