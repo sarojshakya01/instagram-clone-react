@@ -12,7 +12,11 @@ class Search extends React.Component {
           autoCapitalize="none"
           placeholder="Search"
         />
-        <div className="nav-search-container" role="button" tabIndex="0">
+        <div
+          className="nav-search-container dark-need"
+          role="button"
+          tabIndex="0"
+        >
           <div className="nav-search-container-inner">
             <span className="nav-search-container-icon"></span>
             <span className="nav-search-container-search">Search</span>

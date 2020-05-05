@@ -91,6 +91,9 @@ ul {
   fill: #e6e6e6 !important;
 }
 
+.dark div.story-user-id span,
+.dark div.suggestion-user-id-content,
+.dark div.story-label,
 .dark a {
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;

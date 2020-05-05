@@ -13,7 +13,7 @@ class StoryPanel extends React.Component {
 
   render() {
     return (
-      <div className="story-container">
+      <div className="story-container dark-need">
         <div className="story-header">
           <div className="story-header-label">
             <div className="story-header-label-content">{"Stories"}</div>

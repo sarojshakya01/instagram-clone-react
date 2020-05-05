@@ -13,7 +13,7 @@ class Story extends React.Component {
 
   render() {
     return (
-      <div className="story-container dark-need">
+      <div className="story-top story-container dark-need">
         <div className="stories">
           {!this.props.fetched ? (
             <div className="story-loader">

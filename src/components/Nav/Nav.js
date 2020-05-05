@@ -11,16 +11,17 @@ class Nav extends React.Component {
       <nav>
         <div className="inner-nav"></div>
         <div>
-          <div className="nav">
+          <div className="nav dark-need">
             <div className="nav-menus">
-              <Brand />
+              <Brand darkTheme={this.props.label} />
               <Search />
               <Icons profileInfo={this.props.profileInfo} />
-              {/* <SwitchTheme
-                changeTheme={this.props.changeTheme}
-                label={this.props.label}
-              /> */}
             </div>
+
+            <SwitchTheme
+              changeTheme={this.props.changeTheme}
+              label={this.props.label}
+            />
           </div>
         </div>
       </nav>

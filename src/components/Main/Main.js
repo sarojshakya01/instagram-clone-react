@@ -4,67 +4,14 @@ import Story from "./Story/Story";
 import SidePanel from "./SidePanel/SidePanel";
 import Post from "./Post/Post";
 import "./Main.css";
-/*
-const postBy = "sarojsh01";
-const postByPhoto = "../../img/1.jpg";
-const photo = "../../img/post.jpg";
-const caption = { captionBy: postBy, caption: "This is epic" };
-const like = 1000;
-const comments = [
-  {
-    commentBy: "pooja_singh",
-    mention: "sarohsh01",
-    comment: "😂",
-  },
-  {
-    commentBy: "bsthapit",
-    mention: "sarojsh01",
-    comment: "lol 😂",
-  },
-  {
-    commentBy: "revatov",
-    mention: "sarojsh01",
-    comment: "haha",
-  },
-];
-const postTime = "2020-05-03T08:12:12.002Z";
 
-const posts = [
-  {
-    postBy: postBy,
-    postByPhoto: postByPhoto,
-    photo: photo,
-    caption: caption,
-    like: like,
-    comments: comments,
-    postTime: postTime,
-  },
-  {
-    postBy: postBy + "1",
-    postByPhoto: postByPhoto,
-    photo: photo,
-    caption: caption,
-    like: like,
-    comments: comments,
-    postTime: postTime,
-  },
-  {
-    postBy: postBy + "2",
-    postByPhoto: postByPhoto,
-    photo: photo,
-    caption: caption,
-    like: like,
-    comments: comments,
-    postTime: postTime,
-  },
-];
-*/
 class Main extends React.Component {
   constructor() {
     super();
     this.state = {
       posts: [],
       stories: [],
+      suggestions: [],
       fetchedStory: false,
       style: {
         left: "0px",
@@ -82,6 +29,7 @@ class Main extends React.Component {
     this.setState(() => ({
       style: myStyle,
     }));
+    this.props.updateTheme();
   };
 
   componentDidMount = () => {
@@ -135,21 +83,60 @@ class Main extends React.Component {
     });
 
     let tempStories = [];
-    axios.get("http://localhost:3001/user?").then(function (response) {
-      tempStories = response.data.map((myStory) => {
-        let story = {
-          userId: "",
-          profilePhoto: "",
-        };
-        story.userId = myStory.userid;
-        story.profilePhoto = imgUrl + myStory.profilephoto;
-        return story;
+    const loginUser = "sarojsh01";
+    axios
+      .get("http://localhost:3001/story?userid=" + loginUser)
+      .then(function (response) {
+        tempStories = response.data.map((myStory) => {
+          let story = {
+            userId: "",
+            profilePhoto: "",
+            storyDate: "",
+          };
+          story.userId = myStory.userid;
+          story.profilePhoto = imgUrl + myStory.profilephoto;
+          story.storyDate = myStory.storydate;
+          return story;
+        });
+        that.setState(() => ({
+          stories: tempStories,
+          fetchedStory: true,
+        }));
       });
-      that.setState(() => ({
-        stories: tempStories,
-        fetchedStory: true,
-      }));
-    });
+
+    let tempSuggestions = [];
+    axios
+      .get("http://localhost:3001/suggestion?userid=" + loginUser)
+      .then(function (response) {
+        let follower = response.data[0].follower;
+        let followed = response.data[1].followed;
+        for (let i = 2; i < response.data.length; i++) {
+          let suggestion = {
+            userId: "",
+            profilePhoto: "",
+            isFollower: false,
+            commonFollower: [],
+          };
+          suggestion.userId = response.data[i].userid;
+          suggestion.profilePhoto = imgUrl + response.data[i].profilephoto;
+          suggestion.isFollower =
+            follower.indexOf(response.data[i].userid) === -1 ? false : true;
+          for (let j = 0; j < response.data[i].follower.length; j++) {
+            if (followed.indexOf(response.data[i].follower[j].userid) !== -1) {
+              suggestion.commonFollower.push(
+                response.data[i].follower[j].userid
+              );
+            }
+          }
+          if (suggestion.commonFollower.length > 0) {
+            tempSuggestions.push(suggestion);
+          }
+        }
+        that.setState(() => ({
+          suggestions: tempSuggestions,
+          fetchedStory: true,
+        }));
+      });
   };
 
   componentWillUnmount = () => {
@@ -159,7 +146,7 @@ class Main extends React.Component {
   render() {
     return (
       <main role="main" className="dark-need">
-        {window.innerWidth <= 1000 ? (
+        {window.innerWidth <= 1056 ? (
           <section className="main-section">
             <Story
               fetched={this.state.fetchedStory}
@@ -176,6 +163,7 @@ class Main extends React.Component {
               fetched={this.state.fetchedStory}
               profileInfo={this.props.profileInfo}
               stories={this.state.stories}
+              suggestions={this.state.suggestions}
             />
           </section>
         )}

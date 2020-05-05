@@ -3,8 +3,9 @@ import "./SidePanel.css";
 
 const ProfilePanel = (props) => {
   const userId = props.profileInfo.userId;
-  const userName = "Saroj Shakya";
+  const userName = props.profileInfo.userName;
   const profilePhoto = props.profileInfo.profilePhoto;
+
   return (
     <div className="profile-container">
       <div className="profile">

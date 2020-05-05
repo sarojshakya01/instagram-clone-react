@@ -11,7 +11,7 @@ class SidePanel extends React.Component {
       <div className="side-panel" style={this.props.style}>
         <ProfilePanel profileInfo={this.props.profileInfo} />
         <StoryPanel stories={this.props.stories} />
-        <SuggestionPanel suggestions={this.props.stories} />
+        <SuggestionPanel suggestions={this.props.suggestions} />
         <FooterPanel />
       </div>
     );

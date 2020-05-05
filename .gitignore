@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/public/img/userdata/*
+# /public/img/userdata/*
 /.pnp
 .pnp.js
 

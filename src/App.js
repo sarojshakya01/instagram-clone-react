@@ -23,27 +23,43 @@ class App extends React.Component {
   componentDidMount = () => {
     const that = this;
     const imgUrl = "../../img/userdata/";
+    const params = {
+      userid: loginUser,
+      password: loginPassword,
+    };
 
     axios
-      .get(
-        "http://localhost:3001/user?userid=" +
-          loginUser +
-          "&password=" +
-          loginPassword
-      )
+      .post("http://localhost:3001/user", null, {
+        params: params,
+      })
       .then(function (response) {
         let loginUser = {
           userId: response.data[0].userid,
+          userName: response.data[0].username,
           profilePhoto: imgUrl + response.data[0].profilephoto,
         };
         that.setState(() => ({
           loginUser: loginUser,
         }));
       });
+    if (
+      sessionStorage.getItem("darkTheme") !== undefined &&
+      sessionStorage.getItem("darkTheme") !== "undefined"
+    ) {
+      this.setState({
+        darkTheme: "true" === sessionStorage.getItem("darkTheme"),
+      });
+    }
+  };
+
+  updateTheme = () => {
+    this.changeTheme();
+    this.changeTheme();
   };
 
   changeTheme = () => {
     this.setState({ darkTheme: !this.state.darkTheme });
+    sessionStorage.setItem("darkTheme", !this.state.darkTheme);
   };
 
   render() {
@@ -66,7 +82,10 @@ class App extends React.Component {
     return (
       <div className="root-inner">
         <div></div>
-        <Main profileInfo={this.state.loginUser} />
+        <Main
+          profileInfo={this.state.loginUser}
+          updateTheme={this.updateTheme}
+        />
         <Nav
           profileInfo={this.state.loginUser}
           changeTheme={this.changeTheme}

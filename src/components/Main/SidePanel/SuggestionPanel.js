@@ -6,7 +6,7 @@ class SuggestionPanel extends React.Component {
   renderSuggestions = () => {
     const suggestions = this.props.suggestions;
 
-    const suggestionList = suggestions.map((suggestion, index) => {
+    const suggestionList = suggestions.slice(0,3).map((suggestion, index) => {
       return (
         <SuggestionRow key={index} index={index} suggestion={suggestion} />
       );
@@ -16,7 +16,7 @@ class SuggestionPanel extends React.Component {
 
   render() {
     return (
-      <div className="suggestion-container">
+      <div className="suggestion-container dark-need">
         <div className="suggestion-header">
           <div className="suggestion-header-label">
             <div className="suggestion-header-label-content">
@@ -28,7 +28,7 @@ class SuggestionPanel extends React.Component {
           </a>
         </div>
         <div className="suggestion-body-container">
-          <div className="suggestion-body-outer">
+          <div className="suggestion-body-outer dark-need">
             <div className="suggestion-body-inner">
               <div className="suggestion-body">{this.renderSuggestions()}</div>
             </div>

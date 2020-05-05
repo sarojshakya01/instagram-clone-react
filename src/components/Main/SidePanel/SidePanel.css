@@ -185,7 +185,7 @@
   text-overflow: ellipsis;
 }
 
-.story-container {
+.side-panel .story-container {
   margin-top: 4px;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
@@ -302,7 +302,6 @@ a.story-watch-all:visited {
   cursor: pointer;
   display: block;
   font-weight: 600;
-  padding: 5px 0px;
   text-align: center;
   text-transform: inherit;
   text-overflow: ellipsis;
@@ -366,7 +365,7 @@ a.story-watch-all:visited {
 
 .story-body {
   flex-direction: column;
-  padding-bottom: 1144px;
+  /* padding-bottom: 1144px; */
   padding-top: 0px;
 }
 
@@ -396,7 +395,6 @@ a.story-watch-all:visited {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  height: 60px;
   padding-left: 5px;
   padding-right: 16px;
   text-align: left;
