@@ -5,9 +5,9 @@ const app = express();
 
 const router = express.Router();
 
-// const uri = "mongodb+srv://sarojsh:sarojsh@cluster0-jb3wc.gcp.mongodb.net/";
+const uri = "mongodb+srv://sarojsh:sarojsh@cluster0-jb3wc.gcp.mongodb.net/";
 
-const uri = "mongodb://127.0.0.1:27017/";
+// const uri = "mongodb://127.0.0.1:27017/";
 
 const mongocli = mongo.MongoClient;
 
@@ -212,8 +212,23 @@ app.get("/suggestion", function (request, response) {
   );
 });
 
-function test() {
-  query = { userid: "sarojsh01" };
+app.post("/react", function (request, response) {
+  const id = parseInt(request.query.postid);
+  const liked = request.query.liked === "true";
+
+  let incr;
+
+  if (liked) {
+    incr = 1;
+  } else {
+    incr = -1;
+  }
+
+  let query = {};
+  if (id !== undefined && id > 0) {
+    query = { postid: id };
+  }
+
   mongocli.connect(
     uri,
     {
@@ -221,47 +236,60 @@ function test() {
       useUnifiedTopology: true,
     },
     function (err, db) {
+      if (err) throw err;
+
       let dbobj = db.db("Instagram");
       dbobj
-        .collection("user")
+        .collection("post")
         .find(query)
-        .project({ _id: 0 })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
-          let followed = [];
-          if (result[0].followed.length > 0) {
-            followed = result[0].followed.map((elem) => {
-              return elem.userid;
+          if (result[0].liked !== liked) {
+            let dbobj2 = db.db("Instagram");
+            dbobj2.collection("post").updateOne(query, {
+              $inc: { like: incr },
+              $set: { liked: liked },
             });
 
-            followed.push("sarojsh01");
-
-            let dbobj2 = db.db("Instagram");
-            dbobj2
-              .collection("user")
-              .find({
-                userid: { $nin: followed },
-              })
-              .project({
-                _id: 0,
-                password: 0,
-                email: 0,
-                gender: 0,
-                country: 0,
-                createdate: 0,
-                follower: 0,
-              })
+            dbobj
+              .collection("post")
+              .find()
+              .project({ _id: 0 })
               .toArray(function (err, result) {
                 if (err) throw err;
-                // response.send(result);
-                let suggestionResult = result;
-                followed.pop();
-                suggestionResult.unshift({ followed: followed });
-                console.log(suggestionResult);
+                response.send(result);
+                db.close;
               });
           } else {
             response.send("[]");
           }
+        });
+    }
+  );
+});
+
+function test() {
+  query = { postid: 1 };
+  mongocli.connect(
+    uri,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    function (err, db) {
+      if (err) throw err;
+
+      let dbobj = db.db("Instagram");
+      dbobj.collection("post").updateOne(query, { $inc: { like: 1 } });
+
+      let dbobj2 = db.db("Instagram");
+      dbobj2
+        .collection("post")
+        .find()
+        .project({ _id: 0 })
+        .toArray(function (err, result) {
+          if (err) throw err;
+          console.log(result);
           db.close;
         });
     }

@@ -15,7 +15,10 @@ class Description extends React.Component {
     const postTime = this.props.postDetail.postTime;
     return (
       <div className="igpost-description">
-        <IconBar clickPost={this.props.clickPost} />
+        <IconBar
+          likePost={this.props.likePost}
+          setLikePost={this.props.setLikePost}
+        />
         <LikeBar like={like} />
         <CaptionAndComment caption={caption} comments={comments} />
         <TimeDateBar postTime={postTime} />

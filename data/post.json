@@ -1,10 +1,12 @@
 [
   {
+    "postid": 1,
     "postby": "sarojsh01",
     "postbyphoto": "sarojsh01_profilephoto.jpg",
     "photo": "sarojsh01_photo1.jpg",
     "caption": "This is my 1st insta post lol",
     "like": 20,
+    "liked": false,
     "comments": [
       {
         "commentby": "pooza_singh91",
@@ -30,11 +32,13 @@
     "posttime": "2020-05-03T08:12:12.002Z"
   },
   {
+    "postid": 2,
     "postby": "pooza_singh91",
     "postbyphoto": "pooza_singh91_profilephoto.jpg",
     "photo": "pooza_singh91_photo1.jpg",
     "caption": "Lock Down time pass",
     "like": 40,
+    "liked": false,
     "comments": [
       {
         "commentby": "sarojsh01",
@@ -45,11 +49,13 @@
     "posttime": "2020-04-35T08:12:12.002Z"
   },
   {
+    "postid": 3,
     "postby": "bidhan.sthapit",
     "postbyphoto": "bidhan.sthapit_profilephoto.jpg",
     "photo": "bidhan.sthapit_photo1.jpg",
     "caption": "Photo khichna lako",
     "like": 50,
+    "liked": false,
     "comments": [
       {
         "commentby": "sarojsh01",
@@ -70,11 +76,13 @@
     "posttime": "2020-03-12T08:05:12.002Z"
   },
   {
+    "postid": 4,
     "postby": "elna_stha",
     "postbyphoto": "elna_stha_profilephoto.jpg",
     "photo": "elna_stha_photo1.jpg",
     "caption": "dherai mitho khane kura",
     "like": 60,
+    "liked": false,
     "comments": [
       {
         "commentby": "sarojsh01",
@@ -95,11 +103,13 @@
     "posttime": "2020-04-06T03:12:12.002Z"
   },
   {
+    "postid": 5,
     "postby": "rebatov",
     "postbyphoto": "rebatov_profilephoto.jpg",
     "photo": "rebatov_photo1.jpg",
     "caption": "kati ramro chara",
     "like": 70,
+    "liked": false,
     "comments": [
       {
         "commentby": "sarojsh01",

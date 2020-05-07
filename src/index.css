@@ -94,7 +94,7 @@ ul {
 .dark div.story-user-id span,
 .dark div.suggestion-user-id-content,
 .dark div.story-label,
-.like-count-content button,
+.dark .like-count-content button,
 .dark a {
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../Post.css";
 
 const likeIcon = {
@@ -9,32 +9,23 @@ const likeIcon = {
 };
 
 const LikeButton = (props) => {
-  const [click, setClick] = useState(false);
-
-  const handleClick = () => {
-    setClick(true);
-  };
-
-  // if (props.clickPost) {
-  //   setClick(true);
-  // }
-
   let style = {
     fill: "",
   };
 
-  let icon;
+  let icon = likeIcon.white;
 
-  if (click || props.clickPost) {
+  if (props.likePost) {
     icon = likeIcon.red;
     style.fill = "#ed4956";
   } else {
     icon = likeIcon.white;
+    style.fill = "";
   }
 
   return (
     <span className="igpost-direct-action like">
-      <button onClick={handleClick}>
+      <button onClick={props.setLikePost}>
         <svg style={style} height="24" viewBox="0 0 48 48" width="24">
           <path clipRule="evenodd" d={icon} fillRule="evenodd"></path>
         </svg>
