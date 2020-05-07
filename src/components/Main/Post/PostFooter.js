@@ -3,7 +3,7 @@ import "./Post.css";
 
 const PostFooter = () => {
   return (
-    <div className="footer-post">
+    <div className="footer-igpost">
       <div className="footer-igpost-inner">
         <img
           alt="Loading..."

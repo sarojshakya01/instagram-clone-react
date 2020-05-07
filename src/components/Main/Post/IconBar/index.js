@@ -10,7 +10,7 @@ class IconBar extends React.Component {
   render() {
     return (
       <section className="igpost-direct">
-        <LikeButton />
+        <LikeButton clickPost={this.props.clickPost} />
         <CommentButton />
         <ShareButton />
         <BookmarkButton />

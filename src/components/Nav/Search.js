@@ -13,7 +13,7 @@ class Search extends React.Component {
           placeholder="Search"
         />
         <div
-          className="nav-search-container dark-need"
+          className="nav-search-container dark-off"
           role="button"
           tabIndex="0"
         >

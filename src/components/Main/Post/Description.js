@@ -1,7 +1,7 @@
 import React from "react";
-import IconBar from "./IconBar/IconBar";
+import IconBar from "./IconBar";
 import LikeBar from "./LikeBar";
-import CaptionComment from "./CaptionComment/CaptionComment";
+import CaptionAndComment from "./CaptionAndComment";
 import TimeDateBar from "./TimeDateBar";
 import AddComment from "./AddComment";
 
@@ -15,9 +15,9 @@ class Description extends React.Component {
     const postTime = this.props.postDetail.postTime;
     return (
       <div className="igpost-description">
-        <IconBar />
+        <IconBar clickPost={this.props.clickPost} />
         <LikeBar like={like} />
-        <CaptionComment caption={caption} comments={comments} />
+        <CaptionAndComment caption={caption} comments={comments} />
         <TimeDateBar postTime={postTime} />
         <AddComment />
       </div>

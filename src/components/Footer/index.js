@@ -4,9 +4,9 @@ import "./Footer.css";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer className="footer dark-need" role="contentinfo">
+    <footer className="footer dark-off" role="contentinfo">
       <div className="footer-inner">
-        <nav className="dark-need">
+        <nav className="dark-off">
           <ul>
             <li>
               <a

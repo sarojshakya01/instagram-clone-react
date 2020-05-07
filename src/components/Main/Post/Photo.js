@@ -6,7 +6,12 @@ class Photo extends React.Component {
     const { postBy, photo } = this.props.photo;
     return (
       <div className="">
-        <div className="igpost-image" role="button" tabIndex="0">
+        <div
+          className="igpost-image"
+          role="button"
+          tabIndex="0"
+          onDoubleClick={this.props.setClickPost}
+        >
           <div className="igpost-image-bg">
             <div className="igpost-image-bg-content">
               <img alt={"Post by " + postBy} src={photo} />

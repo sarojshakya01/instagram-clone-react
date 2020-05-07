@@ -11,7 +11,7 @@
   margin-left: -4px;
 }
 
-.profile-container {
+.side-panel .profile-container {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -32,7 +32,7 @@
   justify-content: space-between;
 }
 
-.profile {
+.side-panel .profile {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -53,7 +53,7 @@
   width: 100%;
 }
 
-.profile-photo {
+.side-panel .profile-photo {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -73,7 +73,7 @@
   width: 50px;
 }
 
-.profile-photo canvas {
+.side-panel .profile-photo canvas {
   position: absolute;
   top: -5px;
   left: -5px;
@@ -87,7 +87,7 @@
   user-select: none;
 }
 
-.profile-photo a {
+.side-panel .profile-photo a {
   width: 50px;
   height: 50px;
   cursor: pointer;
@@ -105,13 +105,13 @@
   position: relative;
 }
 
-.profile-photo img {
+.side-panel .profile-photo img {
   height: 100%;
   width: 100%;
   -webkit-touch-callout: none;
 }
 
-.profile-photo img::after {
+.side-panel .profile-photo img::after {
   border: 1px solid rgba(0, 0, 0, 0.0975);
   border: 1px solid rgba(var(--jb7, 0, 0, 0), 0.0975);
   border-radius: 50%;
@@ -124,7 +124,7 @@
   top: 0;
 }
 
-.profile-label {
+.side-panel .profile-label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -172,7 +172,7 @@
   text-overflow: ellipsis;
 }
 
-.profile-name {
+.side-panel .profile-name {
   display: inline-block;
   font-size: 12px;
   line-height: 14px;
@@ -1072,14 +1072,12 @@ div.footer-panel {
   line-height: 13px;
 }
 
-.footer-panel .languague {
+.footer-panel .language {
   color: #c7c7c7;
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
   text-transform: none;
-  color: #00376b;
-  color: rgba(var(--fe0, 0, 55, 107), 1);
   cursor: pointer;
   display: inline-block;
   font-weight: 600;
@@ -1088,7 +1086,7 @@ div.footer-panel {
   vertical-align: top;
 }
 
-.footer-panel .languague select {
+.footer-panel .language select {
   cursor: pointer;
   height: 100%;
   left: 0;
@@ -1096,4 +1094,8 @@ div.footer-panel {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+.footer-panel .copyright {
+  color: #8e8e8e;
 }

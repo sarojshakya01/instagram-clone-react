@@ -3,9 +3,10 @@ import "./SidePanel.css";
 
 const FooterPanel = () => {
   const year = new Date().getFullYear();
+
   return (
     <div className="footer-panel">
-      <nav className="dark-need">
+      <nav className="dark-off">
         <ul>
           <li>
             <a

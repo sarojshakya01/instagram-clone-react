@@ -8,16 +8,16 @@ const likeIcon = {
     "M35.3 35.6c-9.2 8.2-9.8 8.9-11.3 8.9s-2.1-.7-11.3-8.9C6.5 30.1.5 25.6.5 17.8.5 9.9 6.4 3.5 13.7 3.5 20.8 3.5 24 8.8 24 8.8s3.2-5.3 10.3-5.3c7.3 0 13.2 6.4 13.2 14.3 0 7.8-6.1 12.3-12.2 17.8z",
 };
 
-const LikeButton = (props) => {
+const Comment = (props) => {
+  const commentBy = props.comment.commentBy;
+  const mention = props.comment.mention;
+  const comment = props.comment.comment;
+
   const [click, setClick] = useState(false);
 
   const handleClick = () => {
     setClick(true);
   };
-
-  // if (props.clickPost) {
-  //   setClick(true);
-  // }
 
   let style = {
     fill: "",
@@ -25,7 +25,7 @@ const LikeButton = (props) => {
 
   let icon;
 
-  if (click || props.clickPost) {
+  if (click) {
     icon = likeIcon.red;
     style.fill = "#ed4956";
   } else {
@@ -33,14 +33,32 @@ const LikeButton = (props) => {
   }
 
   return (
-    <span className="igpost-direct-action like">
-      <button onClick={handleClick}>
-        <svg style={style} height="24" viewBox="0 0 48 48" width="24">
-          <path clipRule="evenodd" d={icon} fillRule="evenodd"></path>
-        </svg>
-      </button>
-    </span>
+    <div className="comment">
+      <div className="comment-inner">
+        <a
+          className="comment-id"
+          title={commentBy}
+          href={"/" + commentBy + "/"}
+        >
+          {commentBy}
+        </a>{" "}
+        <span className="comment-content">
+          <span>
+            <a href={"/" + mention + "/"}>{"@" + mention}</a> {comment}
+          </span>
+        </span>
+      </div>
+      <span className="comment-like-span">
+        <div className="comment-like">
+          <button type="button" onClick={handleClick}>
+            <svg style={style} height="12" viewBox="0 0 48 48" width="12">
+              <path clipRule="evenodd" d={icon} fillRule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </span>
+    </div>
   );
 };
 
-export default LikeButton;
+export default Comment;

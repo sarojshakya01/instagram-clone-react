@@ -13,6 +13,7 @@ class commentList extends React.Component {
     }
     return comments;
   };
+
   render() {
     return (
       <div className="">

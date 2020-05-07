@@ -8,16 +8,19 @@ class SuggestionRow extends React.Component {
     const commonFollower = this.props.suggestion.commonFollower;
 
     let follower = "";
+
     if (commonFollower.length > 0) {
       follower =
         commonFollower[0] +
         " + " +
         (commonFollower.length - 1).toString() +
-        (commonFollower.length - 1 > 1 ? " others" : " other");
+        "more";
     }
+
     const followLabel = this.props.suggestion.isFollower
       ? "Follows you"
       : "followed by " + follower;
+
     return (
       <div className="suggestion-row">
         <div className="suggestion-profile-photo-container">

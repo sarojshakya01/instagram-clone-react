@@ -185,7 +185,7 @@ svg {
   margin-left: 22px;
 }
 
-.directAnchor {
+.direct a {
   position: relative;
 }
 
@@ -214,26 +214,26 @@ svg {
   padding: 0 3px;
 }
 
-.directAfter {
+.direct-after {
   left: 50%;
   top: 48px;
   transform: translateX(-50%);
   transition: top 0.2s ease-in-out;
 }
 
-.activityAnchor {
+.activity a {
   background-color: transparent;
   border: 0;
   cursor: pointer;
   position: relative;
 }
 
-.activityAfter {
+.activity-after {
   margin-left: -423px;
   top: 15px;
 }
 
-.profileIconAchor {
+.nav-icon.profile a {
   width: 22px;
   height: 22px;
   cursor: pointer;
@@ -247,7 +247,20 @@ svg {
   position: relative;
 }
 
-.profileIcon {
+.nav-profile-container {
+  border: 1px solid #262626;
+  border: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+  border-radius: 50%;
+  height: 28px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 28px;
+}
+
+.nav-icon.profile img {
   height: 100%;
   width: 100%;
 }

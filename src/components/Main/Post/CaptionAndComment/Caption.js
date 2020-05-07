@@ -4,6 +4,7 @@ import "../Post.css";
 const Caption = (props) => {
   const captionBy = props.caption.captionBy;
   const caption = props.caption.caption;
+
   return (
     <div className="caption">
       <div className="caption-inner">

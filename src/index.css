@@ -88,21 +88,33 @@ ul {
 }
 
 .dark svg {
-  fill: #e6e6e6 !important;
+  fill: #e6e6e6;
 }
 
 .dark div.story-user-id span,
 .dark div.suggestion-user-id-content,
 .dark div.story-label,
+.like-count-content button,
 .dark a {
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;
 }
 
-.dark .language span {
+.footer .dark .language span {
   color: #3a8fe0;
 }
 
 .dark .add-comment button {
   color: #abb3b9;
+}
+
+.dark .add-comment textarea {
+  color: white;
+}
+
+div,
+img,
+span,
+button {
+  outline: none;
 }

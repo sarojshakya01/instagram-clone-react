@@ -147,6 +147,10 @@ a:visited {
 
 .igpost-image {
   touch-action: manipulation;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .igpost-image-bg {
@@ -214,7 +218,6 @@ a:visited {
 .igpost-direct-action svg {
   display: block;
   position: relative;
-  fill: rgb(38, 38, 38);
   height: 24px;
   width: 24px;
 }
@@ -580,8 +583,9 @@ a:visited {
 }
 
 .footer-igpost {
-  margin-top: 40px;
-  height: 48px;
+  top: 50%;
+  /* margin-top: 40px; */
+  /* height: 48px; */
 }
 
 .footer-igpost-inner {

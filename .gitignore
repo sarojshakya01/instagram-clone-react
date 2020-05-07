@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 # /public/img/userdata/*
+/data/apidataformat
 /.pnp
 .pnp.js
 
