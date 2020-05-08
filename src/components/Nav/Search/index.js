@@ -54,7 +54,7 @@ class Search extends React.Component {
 
     return (
       <div
-        className="nav-search"
+        className="nav-search dark-off"
         onClick={this.handleClick}
         onBlur={this.handleBlur}
       >
@@ -87,11 +87,7 @@ class Search extends React.Component {
           </>
         ) : (
           <>
-            <div
-              className="nav-search-container dark-off"
-              role="button"
-              tabIndex="0"
-            >
+            <div className="nav-search-container" role="button" tabIndex="0">
               <div className="nav-search-container-inner">
                 <span className="nav-search-icon"></span>
                 <span className="nav-search-label">Search</span>

@@ -81,7 +81,11 @@ ul {
   list-style: none;
 }
 
-.dark {
+.dark,
+.dark .nav-search-container,
+.dark .nav-search,
+.dark .nav-search-input,
+.dark .search-result-container {
   background-color: #222 !important;
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;
@@ -95,6 +99,7 @@ ul {
 .dark div.suggestion-user-id-content,
 .dark div.story-label,
 .dark .like-count-content button,
+.dark .search-result-userid,
 .dark a {
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;
@@ -121,4 +126,8 @@ button {
 
 .dark .nav-profile-container {
   border: 1px solid #ce8d8d;
+}
+
+.dark .search-result-container::after {
+  border-color: transparent transparent #000 transparent;
 }
