@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import SuggestionRow from "./SuggestionRow";
-import "./SidePanel.css";
 
 class SuggestionPanel extends React.Component {
   constructor() {
@@ -17,33 +16,34 @@ class SuggestionPanel extends React.Component {
     const imgUrl = "../../img/userdata/";
     const loginUser = "sarojsh01";
     let tempSuggestions = [];
+
     axios
-      .get("http://localhost:3001/suggestion?userid=" + loginUser)
+      .get("http://localhost:3001/suggestion?userId=" + loginUser)
       .then(function (response) {
-        let follower = response.data[0].follower;
-        let followed = response.data[1].followed;
+        let followedBy = response.data[0].followedby;
+        let follows = response.data[1].follows;
         for (let i = 2; i < response.data.length; i++) {
           let suggestion = {
-            userId: "",
-            profilePhoto: "",
-            isFollower: false,
-            commonFollower: [],
+            userId: response.data[i].userid,
+            profilePhoto: imgUrl + response.data[i].profilephoto,
+            isFollowedBy:
+              followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
+            commonFollowedBy: [],
           };
-          suggestion.userId = response.data[i].userid;
-          suggestion.profilePhoto = imgUrl + response.data[i].profilephoto;
-          suggestion.isFollower =
-            follower.indexOf(response.data[i].userid) === -1 ? false : true;
-          for (let j = 0; j < response.data[i].follower.length; j++) {
-            if (followed.indexOf(response.data[i].follower[j].userid) !== -1) {
-              suggestion.commonFollower.push(
-                response.data[i].follower[j].userid
+
+          for (let j = 0; j < response.data[i].followedby.length; j++) {
+            if (follows.indexOf(response.data[i].followedby[j].userid) !== -1) {
+              suggestion.commonFollowedBy.push(
+                response.data[i].followedby[j].userid
               );
             }
           }
-          if (suggestion.commonFollower.length > 0) {
+
+          if (suggestion.commonFollowedBy.length > 0) {
             tempSuggestions.push(suggestion);
           }
         }
+
         that.setState(() => ({
           suggestions: tempSuggestions,
           fetchedSuggestion: true,

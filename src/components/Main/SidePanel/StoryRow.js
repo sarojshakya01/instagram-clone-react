@@ -1,5 +1,4 @@
 import React from "react";
-import "./SidePanel.css";
 
 class StoryRow extends React.Component {
   componentDidMount = () => {
@@ -16,7 +15,6 @@ class StoryRow extends React.Component {
   };
 
   render() {
-    // const translateX = "translateX(" + 80 * parseInt(this.props.index) + "px)";
     const userId = this.props.story.userId;
     const profilePhoto = this.props.story.profilePhoto;
     const storyDate = this.props.story.storyDate;

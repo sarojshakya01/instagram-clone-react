@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Header from "./Header";
 import Photo from "./Photo";
-import Description from "./Description";
+import Description from "./Description/";
 import PostOption from "./PostOption";
 import PostFooter from "./PostFooter";
 import "./Post.css";
@@ -13,52 +13,45 @@ class Post extends React.Component {
     this.state = {
       posts: [],
       fetchedPost: false,
-      likePost: false,
-      prevLikePost: false,
-      reactPost: false,
     };
     this.currentPost = 0;
     this.reactPost = false;
-    this.like = {
-      prevStatus: false,
-      currStatus: false,
-    };
+    this.alreadyReacted = false;
   }
 
   extractPosts = (response) => {
     const imgUrl = "../../img/userdata/";
     let tempPosts = [];
 
-    tempPosts = response.data.map((myPost) => {
-      let post = {
-        postBy: "",
-        postByPhoto: "",
-        photo: "",
-        caption: { captionBy: "", caption: "" },
-        like: 0,
-        liked: null,
-        comments: [],
-        postTime: "",
-      };
+    if (response.data.length > 0) {
+      const loginUser = response.data[0].loginUser;
+      for (let i = 1; i < response.data.length; i++) {
+        let myPost = response.data[i];
+        let post = {
+          loginUser: loginUser,
+          postBy: myPost.postby,
+          location: myPost.location,
+          postByPhoto: imgUrl + myPost.postbyphoto,
+          photo: imgUrl + myPost.photo,
+          caption: { captionBy: myPost.postby, caption: myPost.caption },
+          likes: myPost.likes,
+          comments: myPost.comments.map((cmnt, index) => {
+            let tempComment = {
+              commentId: (i - 1).toString() + "_" + index.toString(),
+              commentBy: cmnt.commentby,
+              mention: cmnt.mention,
+              comment: cmnt.comment,
+              likes: cmnt.likes,
+            };
+            return tempComment;
+          }),
+          postTime: myPost.posttime,
+        };
 
-      post.postBy = myPost.postby;
-      post.postByPhoto = imgUrl + myPost.postbyphoto;
-      post.photo = imgUrl + myPost.photo;
-      post.caption.captionBy = myPost.postby;
-      post.caption.caption = myPost.caption;
-      post.like = myPost.like;
-      post.liked = myPost.liked;
-      post.postTime = myPost.posttime;
+        tempPosts.push(post);
+      }
+    }
 
-      post.comments = myPost.comments.map((cmnt) => {
-        let tempComment = { commentBy: "", mention: "", comment: "" };
-        tempComment.commentBy = cmnt.commentby;
-        tempComment.mention = cmnt.mention;
-        tempComment.comment = cmnt.comment;
-        return tempComment;
-      });
-      return post;
-    });
     return tempPosts;
   };
 
@@ -90,16 +83,19 @@ class Post extends React.Component {
       }
     }
 
-    if (this.reactPost && this.like.currStatus !== this.like.prevStatus) {
+    if (this.reactPost && !this.alreadyReacted) {
       const params = {
-        postid: this.currentPost + 1,
-        liked: this.state.posts[this.currentPost].liked,
+        postId: this.currentPost + 1,
+        liked:
+          this.state.posts[this.currentPost].likes.indexOf(
+            this.state.posts[this.currentPost].loginUser
+          ) > -1,
       };
 
       const that = this;
 
       axios
-        .post("http://localhost:3001/react", null, { params: params })
+        .post("http://localhost:3001/likePost", null, { params: params })
         .then((response) => {
           if (response.data.length > 0) {
             let posts = that.extractPosts(response);
@@ -115,12 +111,17 @@ class Post extends React.Component {
   setLikePost = (e) => {
     const postIndex = parseInt(e.currentTarget.closest("article").id);
     let posts = this.state.posts;
-    posts[postIndex].like = !posts[postIndex].liked ? posts[postIndex].like + 1 : posts[postIndex].like - 1;
-    posts[postIndex].liked = !posts[postIndex].liked;
+    const loginUser = posts[postIndex].loginUser;
+
+    const indexOfUser = posts[postIndex].likes.indexOf(loginUser);
+
+    indexOfUser === -1
+      ? posts[postIndex].likes.push(loginUser)
+      : posts[postIndex].likes.splice(indexOfUser, 1);
     this.currentPost = postIndex;
-    this.like.prevStatus = this.state.posts[postIndex].liked;
-    this.like.currStatus = !this.state.posts[postIndex].liked;
+
     this.reactPost = true;
+    this.alreadyReacted = false;
 
     this.setState({
       posts: posts,
@@ -130,51 +131,47 @@ class Post extends React.Component {
   setClickPost = (e) => {
     const postIndex = parseInt(e.currentTarget.closest("article").id);
     let posts = this.state.posts;
-    posts[postIndex].like = !posts[postIndex].liked ? posts[postIndex].like + 1 : posts[postIndex].like - 1;
-    posts[postIndex].liked = !posts[postIndex].liked;
-    this.currentPost = postIndex;
-    this.like.prevStatus = this.state.posts[postIndex].liked;
-    this.like.currStatus = !this.state.posts[postIndex].liked;
+    const loginUser = posts[postIndex].loginUser;
 
-    if (!this.like.currStatus) {
+    const indexOfUser = posts[postIndex].likes.indexOf(loginUser);
+
+    if (indexOfUser === -1) {
+      posts[postIndex].likes.push(loginUser);
       this.reactPost = true;
+      this.alreadyReacted = false;
       this.setState({
         posts: posts,
       });
+    } else {
+      this.alreadyReacted = true;
     }
   };
 
   renderPosts = () => {
     const postList = this.state.posts;
     const posts = postList.map((post, index) => {
-      const postBy = post.postBy;
-      const postByPhoto = post.postByPhoto;
-      const photo = post.photo;
-      const caption = post.caption;
-      const like = post.like;
-      const comments = post.comments;
-      const postTime = post.postTime;
       const postByInfo = {
-        postBy: postBy,
-        postByPhoto: postByPhoto,
+        postBy: post.postBy,
+        postByPhoto: post.postByPhoto,
+        location: post.location,
       };
       const postedPhoto = {
-        postBy: postBy,
-        photo: photo,
+        postBy: post.postBy,
+        photo: post.photo,
       };
       const postDetails = {
-        caption: caption,
-        like: like,
-        comments: comments,
-        postTime: postTime,
+        loginUser: post.loginUser,
+        caption: post.caption,
+        likes: post.likes,
+        comments: post.comments,
+        postTime: post.postTime,
       };
       return (
         <article key={index} className="igpost dark-off" id={index}>
           <Header postByInfo={postByInfo} />
           <Photo photo={postedPhoto} setClickPost={this.setClickPost} />
           <Description
-            postDetail={postDetails}
-            likePost={post.liked}
+            postDetails={postDetails}
             setLikePost={this.setLikePost}
           />
           <PostOption />

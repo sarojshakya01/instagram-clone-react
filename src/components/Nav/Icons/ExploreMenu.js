@@ -1,5 +1,4 @@
 import React from "react";
-import "../Nav.css";
 
 const exploreIcon = {
   white:

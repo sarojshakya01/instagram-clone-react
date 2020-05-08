@@ -4,7 +4,7 @@ import DirectMenu from "./DirectMenu";
 import ExploreMenu from "./ExploreMenu";
 import ActivityMenu from "./ActivityMenu";
 import ProfileMenu from "./ProfileMenu";
-import "../Nav.css";
+import "./Icons.css";
 
 const Icons = (props) => {
   const [clickHome, setClickHome] = useState(true);

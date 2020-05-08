@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-
 import StoryRow from "./StoryRow";
-import "./SidePanel.css";
+
 
 class StoryPanel extends React.Component {
   constructor() {
@@ -20,19 +19,17 @@ class StoryPanel extends React.Component {
     let tempStories = [];
 
     axios
-      .get("http://localhost:3001/story?userid=" + loginUser)
+      .get("http://localhost:3001/story?userId=" + loginUser)
       .then(function (response) {
         tempStories = response.data.map((myStory) => {
           let story = {
-            userId: "",
-            profilePhoto: "",
-            storyDate: "",
+            userId: myStory.userid,
+            profilePhoto: imgUrl + myStory.profilephoto,
+            storyDate: myStory.storydate,
           };
-          story.userId = myStory.userid;
-          story.profilePhoto = imgUrl + myStory.profilephoto;
-          story.storyDate = myStory.storydate;
           return story;
         });
+
         that.setState(() => ({
           stories: tempStories,
           fetchedStory: true,

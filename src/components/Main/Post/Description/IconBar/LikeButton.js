@@ -1,5 +1,4 @@
 import React from "react";
-import "../Post.css";
 
 const likeIcon = {
   white:
@@ -15,7 +14,7 @@ const LikeButton = (props) => {
 
   let icon = likeIcon.white;
 
-  if (props.likePost) {
+  if (props.likedPost) {
     icon = likeIcon.red;
     style.fill = "#ed4956";
   } else {

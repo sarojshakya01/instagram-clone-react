@@ -3,7 +3,6 @@ import axios from "axios";
 import Nav from "./components/Nav/";
 import Main from "./components/Main/";
 import Footer from "./components/Footer/";
-import "./index.css";
 
 const loginUser = "sarojsh01";
 const loginPassword = "12345";
@@ -15,6 +14,7 @@ class App extends React.Component {
       darkTheme: false,
       loginUser: {
         userId: "",
+        userName: "",
         profilePhoto: "",
       },
       inbox: 0,
@@ -26,7 +26,7 @@ class App extends React.Component {
     const that = this;
     const imgUrl = "../../img/userdata/";
     const params = {
-      userid: loginUser,
+      userId: loginUser,
       password: loginPassword,
     };
 

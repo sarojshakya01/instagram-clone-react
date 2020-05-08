@@ -1,5 +1,4 @@
 import React from "react";
-import "./SidePanel.css";
 
 const ProfilePanel = (props) => {
   const userId = props.profileInfo.userId;

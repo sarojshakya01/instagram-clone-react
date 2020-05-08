@@ -1,5 +1,5 @@
 import React from "react";
-import "../Nav.css";
+
 
 const ProfileMenu = (props) => {
   const userId = props.profileInfo.userId;

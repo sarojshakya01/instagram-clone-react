@@ -118,3 +118,7 @@ span,
 button {
   outline: none;
 }
+
+.dark .nav-profile-container {
+  border: 1px solid #ce8d8d;
+}

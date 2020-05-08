@@ -1,5 +1,4 @@
 import React from "react";
-import "./SidePanel.css";
 
 const FooterPanel = () => {
   const year = new Date().getFullYear();

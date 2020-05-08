@@ -1,25 +1,27 @@
 import React from "react";
-import "./Post.css";
 
 const Header = (props) => {
-  const { postBy, postByPhoto } = props.postByInfo;
+  const { postBy, postByPhoto, location } = props.postByInfo;
+
   return (
     <header>
-      <div className="igpost-user" tabIndex="0">
+      <div className="igpost-postby-photo" tabIndex="0">
         <canvas height="42" width="42"></canvas>
         <a href={"/" + postBy + "/"}>
           <img alt={postBy + " Profile Pic"} src={postByPhoto} />
         </a>
       </div>
-      <div className="igpost-user-name">
-        <div className="igpost-user-name-inner">
-          <div className="igpost-user-name-content">
+      <div className="igpost-postby-label">
+        <div className="igpost-postby-userid">
+          <div className="igpost-postby-name-content">
             <a href={"/" + postBy + "/"}>{postBy}</a>
           </div>
         </div>
-        <div className="igpost-user-name-footer">
+        <div className="igpost-postby-location">
           <div></div>
-          <div></div>
+          <div>
+            <a href="/explore/locations">{location}</a>
+          </div>
         </div>
       </div>
     </header>

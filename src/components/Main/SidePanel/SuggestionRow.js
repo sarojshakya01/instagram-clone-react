@@ -2,24 +2,35 @@ import React from "react";
 import "./SidePanel.css";
 
 class SuggestionRow extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      clickFollow: false,
+    };
+  }
+
+  handleClickFollow = () => {
+    this.setState({ clickFollow: !this.state.clickFollow });
+    alert("This functionality is in development process");
+  };
   render() {
     const userId = this.props.suggestion.userId;
     const profilePhoto = this.props.suggestion.profilePhoto;
-    const commonFollower = this.props.suggestion.commonFollower;
+    const commonFollowedBy = this.props.suggestion.commonFollowedBy;
 
-    let follower = "";
+    let followedBy = "";
 
-    if (commonFollower.length > 0) {
-      follower =
-        commonFollower[0] +
+    if (commonFollowedBy.length > 0) {
+      followedBy =
+        commonFollowedBy[0] +
         " + " +
-        (commonFollower.length - 1).toString() +
+        (commonFollowedBy.length - 1).toString() +
         "more";
     }
 
-    const followLabel = this.props.suggestion.isFollower
+    const followLabel = this.props.suggestion.isFollowdBy
       ? "Follows you"
-      : "followed by " + follower;
+      : "followed by " + followedBy;
 
     return (
       <div className="suggestion-row">
@@ -52,7 +63,7 @@ class SuggestionRow extends React.Component {
           </div>
         </div>
         <div className="follow-link">
-          <button>{"Follow"}</button>
+          <button onClick={this.handleClickFollow}>{"Follow"}</button>
         </div>
       </div>
     );

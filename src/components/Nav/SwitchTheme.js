@@ -1,5 +1,4 @@
 import React from "react";
-import "./Nav.css";
 
 const SwitchTheme = (props) => {
   let style = { top: "0" };

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Post.css";
 
 const TimeDateBar = (props) => {
   const postTime = props.postTime;

@@ -1,0 +1,118 @@
+.nav-icons-container {
+  -ms-flex-line-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 0%;
+  flex: 1 0 0%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.nav-icons-inner {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding-left: 24px;
+  white-space: nowrap;
+}
+
+svg {
+  fill: rgb(38, 38, 38);
+  display: block;
+  position: relative;
+}
+
+.nav-icon:not(:first-child) {
+  margin-left: 22px;
+}
+
+.direct a {
+  position: relative;
+}
+
+.inbox-notif {
+  right: -8px;
+  top: -6px;
+  position: absolute;
+}
+
+.inbox-notif-inner {
+  background-color: #ed4956;
+  background-color: rgba(var(--c37, 237, 73, 86), 1);
+  -webkit-box-align: center;
+  align-items: center;
+  border-radius: 100px;
+  color: #fff;
+  color: rgba(var(--de5, 255, 255, 255), 1);
+  font-size: 11px;
+  height: 18px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  min-width: 18px;
+}
+
+.msg-cnt {
+  padding: 0 3px;
+}
+
+.direct-after {
+  left: 50%;
+  top: 48px;
+  transform: translateX(-50%);
+  transition: top 0.2s ease-in-out;
+}
+
+.activity a {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.activity-after {
+  margin-left: -423px;
+  top: 15px;
+}
+
+.nav-icon.profile a {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.nav-profile-container {
+  border: 1px solid #262626;
+  border: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+  border-radius: 50%;
+  height: 28px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 28px;
+}
+
+.nav-icon.profile img {
+  height: 100%;
+  width: 100%;
+}

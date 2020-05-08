@@ -1,11 +1,22 @@
 import React from "react";
-import "./Post.css";
 
 class PostOption extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      click: false,
+    };
+  }
+
+  handleClick = () => {
+    this.setState({ click: !this.state.click });
+    alert("This functionality is in development process");
+  };
+
   render() {
     return (
       <div className="igpost-option">
-        <button>
+        <button onClick={this.handleClick}>
           <div className="igpost-option-dot">
             <svg fill="#262626" height="16" viewBox="0 0 48 48" width="16">
               <circle
