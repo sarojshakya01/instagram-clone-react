@@ -16,7 +16,7 @@ This project has basic structure of the original [Instagram](https://www.instagr
 10. install all required modules as suggested in the log of `npm start` command or you can mannually install required libraries and dev dependencies from package.json file untill the App runs in your browser
 
 
-You can add comment, react comment, react post from both photo and like icon.
+You can like post from both photo and like icon, add comment, delete comment(only on your post and your comment on other's post), like comment etc.
 
 Enjoy!
 
