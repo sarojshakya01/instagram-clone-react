@@ -14,9 +14,7 @@ class SuggestionRow extends React.Component {
     alert("This functionality is in development process");
   };
   render() {
-    const userId = this.props.suggestion.userId;
-    const profilePhoto = this.props.suggestion.profilePhoto;
-    const commonFollowedBy = this.props.suggestion.commonFollowedBy;
+    const { userId, profilePhoto, commonFollowedBy } = this.props.suggestion;
 
     let followedBy = "";
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 const TimeDateBar = (props) => {
-  const postTime = props.postTime;
+  const { postTime } = props;
   const dateInt = Date.parse(postTime);
 
   let now = new Date();

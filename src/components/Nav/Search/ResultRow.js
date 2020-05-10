@@ -1,9 +1,7 @@
 import React from "react";
 
 const ResultRow = (props) => {
-  const userId = props.result.userId;
-  const profilePhoto = props.result.profilePhoto;
-  const userName = props.result.userName;
+  const {userId, profilePhoto, userName} = props.result
 
   return (
     <a href={"/" + userId + "/"}>

@@ -1,8 +1,7 @@
 import React from "react";
 
 const Caption = (props) => {
-  const captionBy = props.caption.captionBy;
-  const caption = props.caption.caption;
+  const { captionBy, caption } = props.caption;
 
   return (
     <div className="caption">

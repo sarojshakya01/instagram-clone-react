@@ -18,6 +18,8 @@ class commentList extends React.Component {
           key={i}
           comment={commentList[i]}
           loginUser={this.props.loginUser}
+          handleClickLikeComment={this.props.handleClickLikeComment}
+          handleClickDeleteComment={this.props.handleClickDeleteComment}
         />
       );
       comments.push(myComment);

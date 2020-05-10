@@ -12,13 +12,15 @@ class SuggestionPanel extends React.Component {
   }
 
   componentDidMount = () => {
-    const that = this;
+    const self = this;
     const imgUrl = "../../img/userdata/";
     const loginUser = "sarojsh01";
     let tempSuggestions = [];
 
     axios
-      .get("http://localhost:3001/suggestion?userId=" + loginUser)
+      .get("http://localhost:3001/suggestion?userId=" + loginUser, {
+        timeout: 5000,
+      })
       .then(function (response) {
         let followedBy = response.data[0].followedby;
         let follows = response.data[1].follows;
@@ -44,8 +46,14 @@ class SuggestionPanel extends React.Component {
           }
         }
 
-        that.setState(() => ({
+        self.setState(() => ({
           suggestions: tempSuggestions,
+          fetchedSuggestion: true,
+        }));
+      })
+      .catch((err) => {
+        // handle error
+        self.setState(() => ({
           fetchedSuggestion: true,
         }));
       });
@@ -69,7 +77,7 @@ class SuggestionPanel extends React.Component {
   };
 
   renderSuggestions = () => {
-    const suggestions = this.state.suggestions;
+    const { suggestions } = this.state;
 
     const suggestionList = suggestions.slice(0, 3).map((suggestion, index) => {
       return (

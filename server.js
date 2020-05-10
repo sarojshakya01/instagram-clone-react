@@ -1,5 +1,6 @@
 const express = require("express");
 const mongo = require("mongodb");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 
@@ -14,6 +15,8 @@ const mongocli = mongo.MongoClient;
 app.use(express.static("public"));
 app.use("/api", router);
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 function dbConnectionTest() {
   console.log("Database connection testing...");
@@ -39,9 +42,11 @@ app.get("/", function (request, response) {
 app.get("/post", function (request, response) {
   const id = request.query.postId;
   let query = {};
+
   if (id !== undefined && id.length > 0) {
     query = { id: id };
   }
+
   mongocli.connect(
     uri,
     {
@@ -67,8 +72,8 @@ app.get("/post", function (request, response) {
 });
 
 app.post("/user", function (request, response) {
-  const id = request.query.userId;
-  const pw = request.query.password;
+  const id = request.body.params.userId;
+  const pw = request.body.params.password;
   let query = {};
   if (id !== undefined && id.length > 0) {
     query = { userid: id, password: pw };
@@ -149,9 +154,11 @@ app.get("/search", function (request, response) {
 app.get("/story", function (request, response) {
   const id = request.query.userId;
   let query = {};
+
   if (id !== undefined && id.length > 0) {
     query = { userid: id };
   }
+
   mongocli.connect(
     uri,
     {
@@ -269,8 +276,8 @@ app.get("/suggestion", function (request, response) {
 });
 
 app.post("/likePost", function (request, response) {
-  const id = parseInt(request.query.postId);
-  const liked = request.query.liked === "true";
+  const id = parseInt(request.body.params.postId);
+  const liked = request.body.params.liked;
   const likedBy = "sarojsh01";
 
   let updateCondition;
@@ -284,7 +291,7 @@ app.post("/likePost", function (request, response) {
   }
 
   let query = {};
-  if (id !== undefined && id > 0) {
+  if (!isNaN(id) && id > 0) {
     query = { postid: id };
   }
 
@@ -298,27 +305,30 @@ app.post("/likePost", function (request, response) {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
-      dbobj.collection("post").findOneAndUpdate(query, updateCondition);
-
       dbobj
         .collection("post")
-        .find()
-        .project({ _id: 0 })
-        .toArray(function (err, result) {
+        .findOneAndUpdate(query, updateCondition, (err, result) => {
           if (err) throw err;
-          response.send("[]");
-          db.close;
+          dbobj
+            .collection("post")
+            .find(query)
+            .project({ _id: 0 })
+            .toArray(function (err, result) {
+              if (err) throw err;
+              response.send(result[0].likes);
+              db.close;
+            });
         });
     }
   );
 });
 
 app.post("/addComment", function (request, response) {
-  const id = parseInt(request.query.postId);
+  const id = parseInt(request.body.params.postId);
   const newComment = {
-    commentby: request.query.commentBy,
-    mention: request.query.mention,
-    comment: request.query.comment,
+    commentby: request.body.params.commentBy,
+    mention: request.body.params.mention,
+    comment: request.body.params.comment,
     likes: [],
   };
 
@@ -345,30 +355,100 @@ app.post("/addComment", function (request, response) {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
-      dbobj.collection("post").findOneAndUpdate(query, {
-        $push: { comments: newComment },
-      });
-
-      dbobj
-        .collection("post")
-        .find(query)
-        .project({ _id: 0 })
-        .toArray(function (err, result) {
+      dbobj.collection("post").findOneAndUpdate(
+        query,
+        {
+          $push: { comments: newComment },
+        },
+        (err, result) => {
           if (err) throw err;
-          response.send(result[0].comments);
+          response.send(newComment);
           db.close;
-        });
+          // dbobj
+          //   .collection("post")
+          //   .find(query)
+          //   .project({ _id: 0 })
+          //   .toArray(function (err, result) {
+          //     if (err) throw err;
+          //     if (result[0].comments.indexOf(newComment) > -1)
+          //       response.send(newComment);
+          //     else response.send("[]");
+          //     db.close;
+          //   });
+        }
+      );
     }
   );
 });
 
-app.post("/likedComment", function (request, response) {
-  const id = parseInt(request.query.postId);
-  const commentId = parseInt(request.query.commentId);
-  const likedBy = request.query.likedBy;
-  const liked = request.query.liked === "true";
+app.post("/deleteComment", function (request, response) {
+  setTimeout(() => {
+    const id = parseInt(request.body.params.postId);
+    const commentId = parseInt(request.body.params.commentId);
 
-  const keyString = "comments." + commentId.toString() + ".likes";
+    if (isNaN(commentId)) {
+      response.send("[]");
+      return;
+    }
+
+    let query = {};
+    if (!isNaN(id) && id > 0) {
+      query = { postid: id };
+    } else {
+      response.send("[]");
+      return;
+    }
+    const keyString = `comments.${commentId}`;
+
+    const deleteCondition = {
+      unset: {
+        $unset: { [keyString]: 1 },
+      },
+      pull: { $pull: { comments: null } },
+    };
+
+    mongocli.connect(
+      uri,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      function (err, db) {
+        if (err) throw err;
+
+        let dbobj = db.db("Instagram");
+        dbobj
+          .collection("post")
+          .findOneAndUpdate(query, deleteCondition.unset, (err, result) => {
+            if (err) throw err;
+            db.close;
+            dbobj
+              .collection("post")
+              .findOneAndUpdate(query, deleteCondition.pull, (err, result) => {
+                dbobj
+                  .collection("post")
+                  .find(query)
+                  .project({ _id: 0 })
+                  .toArray(function (err, result) {
+                    if (err) throw err;
+
+                    response.send(result[0].comments);
+                    db.close;
+                  });
+              });
+          });
+      }
+    );
+  }, 0);
+});
+
+app.post("/likeComment", function (request, response) {
+  const id = parseInt(request.body.params.postId);
+  const commentId = parseInt(request.body.params.commentId);
+  const likedBy = request.body.params.likedBy;
+  const liked = request.body.params.liked;
+
+  const keyString = `comments.${commentId}.likes`;
   let updateCondition;
 
   if (liked) {
@@ -399,16 +479,19 @@ app.post("/likedComment", function (request, response) {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
-      dbobj.collection("post").findOneAndUpdate(query, updateCondition);
-
       dbobj
         .collection("post")
-        .find(query)
-        .project({ _id: 0 })
-        .toArray((err, result) => {
+        .findOneAndUpdate(query, updateCondition, (err, result) => {
           if (err) throw err;
-          response.send(result[0].comments[commentId].likes);
-          db.close;
+          dbobj
+            .collection("post")
+            .find(query)
+            .project({ _id: 0 })
+            .toArray((err, result) => {
+              if (err) throw err;
+              response.send(result[0].comments[commentId].likes);
+              db.close;
+            });
         });
     }
   );

@@ -16,8 +16,7 @@ class StoryIcon extends React.Component {
 
   render() {
     const translateX = "translateX(" + 80 * parseInt(this.props.index) + "px)";
-    const userId = this.props.story.userId;
-    const profilePhoto = this.props.story.profilePhoto;
+    const { userId, profilePhoto } = this.props.story;
 
     /*const storyDate = this.props.story.storyDate;
     const dateInt = Date.parse(storyDate);

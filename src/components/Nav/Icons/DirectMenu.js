@@ -9,7 +9,8 @@ const directIcon = {
 
 const DirectMenu = (props) => {
   const icon = props.click ? directIcon.black : directIcon.white;
-  const inbox = props.inbox;
+  const { inbox } = props;
+
   return (
     <div className="nav-icon direct" onClick={props.handleClick}>
       <a href="/direct/inbox/">

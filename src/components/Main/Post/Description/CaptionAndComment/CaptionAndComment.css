@@ -114,6 +114,11 @@
 }
 
 .comment-like-count {
+  display: block;
+  max-width: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 10px;
   margin-right: 5px;
   margin-top: -1px;
@@ -153,4 +158,31 @@
   fill: rgb(142, 142, 142);
   height: 12px;
   width: 12px;
+}
+
+.comment-delete-span {
+  max-width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  margin-bottom: 2px;
+}
+
+.comment-delete button {
+  padding: 0;
+  -webkit-box-align: center;
+  align-items: center;
+  background: 0 0;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.comment-delete svg {
+  display: block;
+  position: relative;
+  fill: rgb(142, 142, 142);
+  height: 15px;
+  width: 15px;
 }

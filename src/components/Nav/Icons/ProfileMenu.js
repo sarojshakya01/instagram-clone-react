@@ -1,9 +1,7 @@
 import React from "react";
 
-
 const ProfileMenu = (props) => {
-  const userId = props.profileInfo.userId;
-  const profilePhoto = props.profileInfo.profilePhoto;
+  const { userId, profilePhoto } = props.profileInfo;
 
   let style = {
     display: "none",

@@ -15,9 +15,7 @@ class StoryRow extends React.Component {
   };
 
   render() {
-    const userId = this.props.story.userId;
-    const profilePhoto = this.props.story.profilePhoto;
-    const storyDate = this.props.story.storyDate;
+    const { userId, profilePhoto, storyDate } = this.props.story;
     const dateInt = Date.parse(storyDate);
 
     let now = new Date();

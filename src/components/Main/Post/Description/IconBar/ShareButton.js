@@ -5,6 +5,7 @@ const shareIcon =
 
 const ShareButton = () => {
   const [click, setClick] = useState(false);
+
   const handleClick = () => {
     setClick(!click);
     alert("This functionality is in development process");

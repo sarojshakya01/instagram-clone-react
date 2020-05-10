@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import StoryRow from "./StoryRow";
 
-
 class StoryPanel extends React.Component {
   constructor() {
     super();
@@ -13,13 +12,13 @@ class StoryPanel extends React.Component {
   }
 
   componentDidMount = () => {
-    const that = this;
+    const self = this;
     const imgUrl = "../../img/userdata/";
     const loginUser = "sarojsh01";
     let tempStories = [];
 
     axios
-      .get("http://localhost:3001/story?userId=" + loginUser)
+      .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
       .then(function (response) {
         tempStories = response.data.map((myStory) => {
           let story = {
@@ -30,8 +29,14 @@ class StoryPanel extends React.Component {
           return story;
         });
 
-        that.setState(() => ({
+        self.setState(() => ({
           stories: tempStories,
+          fetchedStory: true,
+        }));
+      })
+      .catch((err) => {
+        //handle error
+        self.setState(() => ({
           fetchedStory: true,
         }));
       });
@@ -55,7 +60,7 @@ class StoryPanel extends React.Component {
   };
 
   renderStories = () => {
-    const stories = this.state.stories;
+    const { stories } = this.state;
     const storyList = stories.map((story, index) => {
       return <StoryRow key={index} index={index} story={story} />;
     });

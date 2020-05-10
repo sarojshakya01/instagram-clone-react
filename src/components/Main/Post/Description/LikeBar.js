@@ -1,8 +1,9 @@
 import React from "react";
 
 const LikeBar = (props) => {
-  const likes = props.likes;
+  const { likes } = props;
   const label = likes.length > 1 ? " likes" : " like";
+
   return (
     <section className="like-count">
       <div className="like-count-inner">

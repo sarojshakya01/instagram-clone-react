@@ -15,8 +15,7 @@ class Post extends React.Component {
       fetchedPost: false,
     };
     this.currentPost = 0;
-    this.reactPost = false;
-    this.alreadyReacted = false;
+    this.prevPosts = [];
   }
 
   extractPosts = (response) => {
@@ -56,15 +55,26 @@ class Post extends React.Component {
   };
 
   componentDidMount = () => {
-    const that = this;
+    const self = this;
+    const params = {
+      postId: "",
+    };
 
-    axios.get("http://localhost:3001/post?").then(function (response) {
-      let posts = that.extractPosts(response);
-      that.setState(() => ({
-        posts: posts,
-        fetchedPost: true,
-      }));
-    });
+    axios
+      .get("http://localhost:3001/post", { params }, { timeout: 5000 })
+      .then((response) => {
+        let posts = self.extractPosts(response);
+        self.setState(() => ({
+          posts: posts,
+          fetchedPost: true,
+        }));
+      })
+      .catch(() => {
+        self.setState(() => ({
+          posts: [],
+          fetchedPost: true,
+        }));
+      });
   };
 
   componentDidUpdate = () => {
@@ -82,74 +92,79 @@ class Post extends React.Component {
         elems[i].classList.remove("dark");
       }
     }
+  };
 
-    if (this.reactPost && !this.alreadyReacted) {
-      const params = {
-        postId: this.currentPost + 1,
-        liked:
-          this.state.posts[this.currentPost].likes.indexOf(
-            this.state.posts[this.currentPost].loginUser
-          ) > -1,
-      };
+  handleLikePost = (liked) => {
+    const params = {
+      postId: this.currentPost + 1, // id in db is 1 more
+      liked: liked,
+    };
 
-      const that = this;
+    const self = this;
 
-      axios
-        .post("http://localhost:3001/likePost", null, { params: params })
-        .then((response) => {
-          if (response.data.length > 0) {
-            let posts = that.extractPosts(response);
-            that.reactPost = false;
-            that.setState({
-              posts: posts,
-            });
-          }
+    axios
+      .post("http://localhost:3001/likePost", { params }, { timeout: 5000 })
+      .then((response) => {
+        let { posts } = { ...self.state };
+        posts[self.currentPost].likes = response.data;
+        self.setState({
+          posts,
         });
-    }
+      })
+      .catch(() => {
+        // roll back the changes
+        self.setState({
+          posts: self.prevPosts,
+        });
+      });
   };
 
   setLikePost = (e) => {
     const postIndex = parseInt(e.currentTarget.closest("article").id);
-    let posts = this.state.posts;
-    const loginUser = posts[postIndex].loginUser;
+    this.prevPosts = JSON.parse(JSON.stringify(this.state.posts));
 
-    const indexOfUser = posts[postIndex].likes.indexOf(loginUser);
+    let { posts } = { ...this.state };
+    const { loginUser } = posts[postIndex];
+    const indexOfPostLiker = posts[postIndex].likes.indexOf(loginUser);
 
-    indexOfUser === -1
-      ? posts[postIndex].likes.push(loginUser)
-      : posts[postIndex].likes.splice(indexOfUser, 1);
     this.currentPost = postIndex;
 
-    this.reactPost = true;
-    this.alreadyReacted = false;
+    this.handleLikePost(indexOfPostLiker === -1);
+
+    // for quick fake response, update the state. Later, actual state will be updated from API response
+    indexOfPostLiker > 0
+      ? posts[postIndex].likes.splice(indexOfPostLiker, 1)
+      : posts[postIndex].likes.push(loginUser);
 
     this.setState({
-      posts: posts,
+      posts,
     });
   };
 
   setClickPost = (e) => {
     const postIndex = parseInt(e.currentTarget.closest("article").id);
-    let posts = this.state.posts;
-    const loginUser = posts[postIndex].loginUser;
+    this.prevPosts = JSON.parse(JSON.stringify(this.state.posts));
 
-    const indexOfUser = posts[postIndex].likes.indexOf(loginUser);
+    let { posts } = this.state;
+    const { loginUser } = posts[postIndex];
+    const indexOfPostLiker = posts[postIndex].likes.indexOf(loginUser);
 
-    if (indexOfUser === -1) {
+    this.currentPost = postIndex;
+
+    if (indexOfPostLiker === -1) {
+      this.handleLikePost(true);
+
+      // for quick fake response, update the state. Later, actual state will be updated from API response
       posts[postIndex].likes.push(loginUser);
-      this.reactPost = true;
-      this.alreadyReacted = false;
       this.setState({
-        posts: posts,
+        posts,
       });
-    } else {
-      this.alreadyReacted = true;
     }
   };
 
   renderPosts = () => {
-    const postList = this.state.posts;
-    const posts = postList.map((post, index) => {
+    const { posts } = this.state;
+    const postList = posts.map((post, index) => {
       const postByInfo = {
         postBy: post.postBy,
         postByPhoto: post.postByPhoto,
@@ -166,6 +181,7 @@ class Post extends React.Component {
         comments: post.comments,
         postTime: post.postTime,
       };
+
       return (
         <article key={index} className="igpost dark-off" id={index}>
           <Header postByInfo={postByInfo} />
@@ -178,7 +194,7 @@ class Post extends React.Component {
         </article>
       );
     });
-    return posts;
+    return postList;
   };
 
   render() {

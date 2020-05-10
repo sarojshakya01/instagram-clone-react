@@ -8,6 +8,7 @@ class Search extends React.Component {
     super();
     this.state = {
       clickSearch: false,
+      dataFetched: true,
       value: "",
       results: [],
     };
@@ -15,6 +16,9 @@ class Search extends React.Component {
 
   handleClick = (e) => {
     this.setState({ clickSearch: true });
+    // debugger;
+    e.currentTarget.children[0].click();
+    e.currentTarget.click();
     e.currentTarget.click();
   };
 
@@ -23,11 +27,14 @@ class Search extends React.Component {
   };
 
   handleChange = (e) => {
-    this.setState({ value: e.target.value });
-    const that = this;
+    this.setState({ value: e.target.value, dataFetched: false });
+    const self = this;
     const imgUrl = "../../img/userdata/";
+
     axios
-      .get("http://localhost:3001/search?q=" + e.target.value)
+      .get("http://localhost:3001/search?q=" + e.target.value, {
+        timeout: 5000,
+      })
       .then((response) => {
         const results = response.data.map((elem) => {
           let result = {
@@ -37,12 +44,15 @@ class Search extends React.Component {
           };
           return result;
         });
-        that.setState({ results: results });
+        self.setState({ results: results, dataFetched: true });
+      })
+      .catch(() => {
+        self.setState({ results: [], dataFetched: true });
       });
   };
 
   renderResults = (data) => {
-    const results = this.state.results;
+    const { results } = this.state;
     const resultRows = results.map((result, index) => {
       return <ResultRow key={index} result={result} />;
     });
@@ -50,7 +60,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const clickSearch = this.state.clickSearch;
+    const { clickSearch, dataFetched } = this.state;
 
     return (
       <div
@@ -70,12 +80,19 @@ class Search extends React.Component {
         {clickSearch ? (
           <>
             <span className="nav-search-icon-left"></span>
-            <div
-              className="nav-search-clear-icon"
-              role="button"
-              tabIndex="0"
-              onClick={this.handleBlur}
-            ></div>
+            {dataFetched ? (
+              <div
+                className="nav-search-clear-icon"
+                role="button"
+                tabIndex="0"
+                onClick={this.handleBlur}
+              ></div>
+            ) : (
+              <div className="nav-search-loader">
+                <img alt={"loader"} src="../../img/loader.gif" />
+              </div>
+            )}
+
             {this.state.results.length > 0 ? (
               <div>
                 <div className="search-result-arrow"></div>

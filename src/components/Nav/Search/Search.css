@@ -88,6 +88,21 @@
   background-image: url(../../../img/bundle.png);
 }
 
+.nav-search-loader {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 3;
+  opacity: 0.4;
+}
+
+.nav-search-loader img {
+  height: 100%;
+  width: 100%;
+}
+
 .search-result-arrow {
   top: 4px;
   background: #fff;

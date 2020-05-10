@@ -1,9 +1,7 @@
 import React from "react";
 
 const ProfilePanel = (props) => {
-  const userId = props.profileInfo.userId;
-  const userName = props.profileInfo.userName;
-  const profilePhoto = props.profileInfo.profilePhoto;
+  const { userId, userName, profilePhoto } = props.profileInfo;
 
   return (
     <div className="profile-container">
