@@ -199,14 +199,21 @@ class Description extends React.Component {
   };
 
   render() {
-    const { likes, caption, postTime, loginUser } = this.props.postDetails;
+    const {
+      postBy,
+      likes,
+      caption,
+      postTime,
+      loginUser,
+    } = this.props.postDetails;
     const likedPost = likes.indexOf(loginUser) > -1;
-
+    debugger;
     return (
       <div className="igpost-description">
         <IconBar likedPost={likedPost} setLikePost={this.props.setLikePost} />
         {likes.length > 0 ? <LikeBar likes={likes} /> : null}
         <CaptionAndComment
+          postBy={postBy}
           caption={caption}
           comments={this.state.comments}
           loginUser={loginUser}

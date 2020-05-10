@@ -175,6 +175,7 @@ class Post extends React.Component {
         photo: post.photo,
       };
       const postDetails = {
+        postBy: post.postBy,
         loginUser: post.loginUser,
         caption: post.caption,
         likes: post.likes,

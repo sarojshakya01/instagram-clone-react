@@ -10,6 +10,7 @@ const CaptionComment = (props) => {
     <div className="caption-comment">
       {caption.caption.length > 0 ? <Caption caption={caption} /> : null}
       <CommentList
+        postBy={props.postBy}
         comments={comments}
         loginUser={props.loginUser}
         handleClickLikeComment={props.handleClickLikeComment}

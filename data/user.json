@@ -207,5 +207,28 @@
       { "userid": "sandeep25" }
     ],
     "storydate": "Tue May 05 2020 00:00:00 GMT+0545 (Nepal Time)"
+  },
+  {
+    "userid": "_thehasinaaykahs",
+    "password": "12345",
+    "username": "Hasina Shakya",
+    "email": "_thehasinaaykahs@gmail.com",
+    "gender": "female",
+    "country": "Nepal",
+    "createdate": "Wed Jan 01 2020 00:00:00 GMT+0545 (Nepal Time)",
+    "profilephoto": "_thehasinaaykahs_profilephoto.jpg",
+    "followedby": [
+      { "userid": "sarojsh01" },
+      { "userid": "pooza_singh91" },
+      { "userid": "rajeshhamal" },
+      { "userid": "sandeep25" },
+      { "userid": "baburam.bhattarai" }
+    ],
+    "follows": [
+      { "userid": "sarojsh01" },
+      { "userid": "pooza_singh91" },
+      { "userid": "sandeep25" }
+    ],
+    "storydate": "Tue May 05 2020 00:00:00 GMT+0545 (Nepal Time)"
   }
 ]

@@ -21,7 +21,7 @@ const Comment = (props) => {
   };
 
   const { commentId, commentBy, mention, comment, likes } = props.comment;
-  const { loginUser } = props;
+  const { postBy, loginUser } = props;
   const liked = likes.indexOf(loginUser) > -1;
 
   let style = {
@@ -68,19 +68,21 @@ const Comment = (props) => {
           </button>
         </div>
       </span>
-      <span className="comment-delete-span">
-        <div className="comment-delete">
-          <button type="button" onClick={handleClickDelete}>
-            <svg height="24" viewBox="0 0 24 24" width="24">
-              <path
-                clipRule="evenodd"
-                d={icon.delete}
-                fillRule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </span>
+      {postBy === loginUser || commentBy === loginUser ? (
+        <span className="comment-delete-span">
+          <div className="comment-delete">
+            <button type="button" onClick={handleClickDelete}>
+              <svg height="24" viewBox="0 0 24 24" width="24">
+                <path
+                  clipRule="evenodd"
+                  d={icon.delete}
+                  fillRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </span>
+      ) : null}
     </div>
   );
 };

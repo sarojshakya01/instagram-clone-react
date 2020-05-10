@@ -16,6 +16,7 @@ class commentList extends React.Component {
       let myComment = (
         <Comment
           key={i}
+          postBy={this.props.postBy}
           comment={commentList[i]}
           loginUser={this.props.loginUser}
           handleClickLikeComment={this.props.handleClickLikeComment}
