@@ -15,11 +15,8 @@ class Search extends React.Component {
   }
 
   handleClick = (e) => {
+    document.getElementById("nav-search-input").focus();
     this.setState({ clickSearch: true });
-    // debugger;
-    e.currentTarget.children[0].click();
-    e.currentTarget.click();
-    e.currentTarget.click();
   };
 
   handleBlur = () => {

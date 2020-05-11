@@ -20,7 +20,7 @@ class Story extends React.Component {
 
     axios
       .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
-      .then(function (response) {
+      .then((response) => {
         tempStories = response.data.map((myStory) => {
           let story = {
             userId: myStory.userid,

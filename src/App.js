@@ -38,7 +38,7 @@ class App extends React.Component {
         },
         { timeout: 5000 }
       )
-      .then(function (response) {
+      .then((response) => {
         self.loginUser.userId = response.data[0].userid;
         self.loginUser.userName = response.data[0].username;
         self.loginUser.profilePhoto = imgUrl + response.data[0].profilephoto;

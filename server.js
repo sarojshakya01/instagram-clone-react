@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-function dbConnectionTest() {
+dbConnectionTest = () => {
   console.log("Database connection testing...");
   mongocli.connect(
     uri,
@@ -26,20 +26,20 @@ function dbConnectionTest() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
       console.log("Database Connected Successfully at " + uri);
       db.close;
       console.log("Database connection closed!");
     }
   );
-}
+};
 
-app.get("/", function (request, response) {
+app.get("/", (request, response) => {
   response.sendfile("./public/index.html");
 });
 
-app.get("/post", function (request, response) {
+app.get("/post", (request, response) => {
   const id = request.query.postId;
   let query = {};
 
@@ -53,7 +53,7 @@ app.get("/post", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -61,7 +61,7 @@ app.get("/post", function (request, response) {
         .collection("post")
         .find(query)
         .project({ _id: 0 })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
           result.unshift({ loginUser: "sarojsh01" });
           response.send(result);
@@ -71,7 +71,7 @@ app.get("/post", function (request, response) {
   );
 });
 
-app.post("/user", function (request, response) {
+app.post("/user", (request, response) => {
   const id = request.body.params.userId;
   const pw = request.body.params.password;
   let query = {};
@@ -84,7 +84,7 @@ app.post("/user", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -102,7 +102,7 @@ app.post("/user", function (request, response) {
           follows: 0,
           storydate: 0,
         })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
           response.send(result);
           db.close;
@@ -111,7 +111,7 @@ app.post("/user", function (request, response) {
   );
 });
 
-app.get("/search", function (request, response) {
+app.get("/search", (request, response) => {
   const q = request.query.q;
 
   if (q === undefined || q.length === 0) {
@@ -125,7 +125,7 @@ app.get("/search", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
       let dbobj = db.db("Instagram");
       dbobj
@@ -142,7 +142,7 @@ app.get("/search", function (request, response) {
           follows: 0,
           storydate: 0,
         })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
           response.send(result);
           db.close;
@@ -151,7 +151,7 @@ app.get("/search", function (request, response) {
   );
 });
 
-app.get("/story", function (request, response) {
+app.get("/story", (request, response) => {
   const id = request.query.userId;
   let query = {};
 
@@ -165,7 +165,7 @@ app.get("/story", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -173,7 +173,7 @@ app.get("/story", function (request, response) {
         .collection("user")
         .find(query)
         .project({ _id: 0 })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
           let follows = [];
           if (result[0].follows.length > 0) {
@@ -197,7 +197,7 @@ app.get("/story", function (request, response) {
                 followedby: 0,
                 follows: 0,
               })
-              .toArray(function (err, result) {
+              .toArray((err, result) => {
                 if (err) throw err;
                 response.send(result);
               });
@@ -210,7 +210,7 @@ app.get("/story", function (request, response) {
   );
 });
 
-app.get("/suggestion", function (request, response) {
+app.get("/suggestion", (request, response) => {
   const id = request.query.userId;
   let query = {};
   if (id !== undefined && id.length > 0) {
@@ -222,7 +222,7 @@ app.get("/suggestion", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -230,7 +230,7 @@ app.get("/suggestion", function (request, response) {
         .collection("user")
         .find(query)
         .project({ _id: 0 })
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
           if (err) throw err;
           let follows = result[0].follows.map((elem) => {
             return elem.userid;
@@ -260,7 +260,7 @@ app.get("/suggestion", function (request, response) {
               follows: 0,
               storydate: 0,
             })
-            .toArray(function (err, result) {
+            .toArray((err, result) => {
               if (err) throw err;
               let suggestionResult = result;
               follows.pop();
@@ -275,7 +275,7 @@ app.get("/suggestion", function (request, response) {
   );
 });
 
-app.post("/likePost", function (request, response) {
+app.post("/likePost", (request, response) => {
   const id = parseInt(request.body.params.postId);
   const liked = request.body.params.liked;
   const likedBy = "sarojsh01";
@@ -301,7 +301,7 @@ app.post("/likePost", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -313,7 +313,7 @@ app.post("/likePost", function (request, response) {
             .collection("post")
             .find(query)
             .project({ _id: 0 })
-            .toArray(function (err, result) {
+            .toArray((err, result) => {
               if (err) throw err;
               response.send(result[0].likes);
               db.close;
@@ -323,7 +323,7 @@ app.post("/likePost", function (request, response) {
   );
 });
 
-app.post("/addComment", function (request, response) {
+app.post("/addComment", (request, response) => {
   const id = parseInt(request.body.params.postId);
   const newComment = {
     commentby: request.body.params.commentBy,
@@ -351,7 +351,7 @@ app.post("/addComment", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -364,24 +364,13 @@ app.post("/addComment", function (request, response) {
           if (err) throw err;
           response.send(newComment);
           db.close;
-          // dbobj
-          //   .collection("post")
-          //   .find(query)
-          //   .project({ _id: 0 })
-          //   .toArray(function (err, result) {
-          //     if (err) throw err;
-          //     if (result[0].comments.indexOf(newComment) > -1)
-          //       response.send(newComment);
-          //     else response.send("[]");
-          //     db.close;
-          //   });
         }
       );
     }
   );
 });
 
-app.post("/deleteComment", function (request, response) {
+app.post("/deleteComment", (request, response) => {
   setTimeout(() => {
     const id = parseInt(request.body.params.postId);
     const commentId = parseInt(request.body.params.commentId);
@@ -413,7 +402,7 @@ app.post("/deleteComment", function (request, response) {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
-      function (err, db) {
+      (err, db) => {
         if (err) throw err;
 
         let dbobj = db.db("Instagram");
@@ -429,7 +418,7 @@ app.post("/deleteComment", function (request, response) {
                   .collection("post")
                   .find(query)
                   .project({ _id: 0 })
-                  .toArray(function (err, result) {
+                  .toArray((err, result) => {
                     if (err) throw err;
 
                     response.send(result[0].comments);
@@ -442,7 +431,7 @@ app.post("/deleteComment", function (request, response) {
   }, 0);
 });
 
-app.post("/likeComment", function (request, response) {
+app.post("/likeComment", (request, response) => {
   const id = parseInt(request.body.params.postId);
   const commentId = parseInt(request.body.params.commentId);
   const likedBy = request.body.params.likedBy;
@@ -475,7 +464,7 @@ app.post("/likeComment", function (request, response) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    function (err, db) {
+    (err, db) => {
       if (err) throw err;
 
       let dbobj = db.db("Instagram");
@@ -499,7 +488,7 @@ app.post("/likeComment", function (request, response) {
 
 const port = 3001;
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log("Server Running at localhost:" + port);
   dbConnectionTest();
 });

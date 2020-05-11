@@ -21,7 +21,7 @@ class SuggestionPanel extends React.Component {
       .get("http://localhost:3001/suggestion?userId=" + loginUser, {
         timeout: 5000,
       })
-      .then(function (response) {
+      .then((response) => {
         let followedBy = response.data[0].followedby;
         let follows = response.data[1].follows;
         for (let i = 2; i < response.data.length; i++) {
