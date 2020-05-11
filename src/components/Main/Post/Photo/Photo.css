@@ -67,6 +67,10 @@
   background: rgba(var(--d69, 0, 149, 246), 1);
 }
 
+.blank-dot {
+  height: 6px;
+}
+
 .slide-arrow {
   cursor: pointer;
   background: 0 0;

@@ -14,7 +14,7 @@ const Brand = (props) => {
       props.darkTheme === "ON"
         ? "../../img/instagram-logo-black.png"
         : "../../img/instagram-logo.png";
-    style = { width: "13%", height: "13%", margin: "0 0 8px 0" };
+    style = { width: "11%", height: "11%", margin: "0 0 8px 0" };
   }
 
   return (

@@ -19,11 +19,13 @@ class Carousel extends React.Component {
   };
 
   renderDots = () => {
-    const dots = this.props.photoList.map((dot, index) => {
-      const myClass = index === this.state.currPhoto ? "dot current" : "dot";
-      return <div key={index} className={myClass}></div>;
-    });
-    return dots;
+    if (this.props.photoList.length > 1) {
+      const dots = this.props.photoList.map((dot, index) => {
+        const myClass = index === this.state.currPhoto ? "dot current" : "dot";
+        return <div key={index} className={myClass}></div>;
+      });
+      return dots;
+    } else return <div className="blank-dot"></div>;
   };
 
   render() {
