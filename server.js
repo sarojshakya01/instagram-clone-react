@@ -130,7 +130,7 @@ app.get("/search", (request, response) => {
       let dbobj = db.db("Instagram");
       dbobj
         .collection("user")
-        .find({ userid: { $regex: q } })
+        .find({ $or: [{ userid: { $regex: q } }, { username: { $regex: q } }] })
         .project({
           _id: 0,
           password: 0,
