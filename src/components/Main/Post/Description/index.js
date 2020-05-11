@@ -42,8 +42,9 @@ class Description extends React.Component {
     this.setState({ textareaValue: e.target.value });
   };
 
-  postComment = (value, postId) => {
-    if (value !== "") {
+  postComment = (postId) => {
+    if (this.state.textareaValue !== "") {
+      const value = this.state.textareaValue;
       this.postId = postId;
       const newComment = {
         commentBy: this.props.postDetails.loginUser,
@@ -102,19 +103,17 @@ class Description extends React.Component {
   handlePostComment = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (e.target.value.trim() !== "") {
-        const { value } = e.target;
+      if (this.state.textareaValue.trim() !== "") {
         const postId = parseInt(e.currentTarget.closest("article").id);
-        this.postComment(value, postId);
+        this.postComment(postId);
       }
     }
   };
 
   handlePostCommentBtn = (e) => {
     const textareaElem = e.currentTarget.parentElement.elements[0];
-    const { value } = textareaElem;
     const postId = parseInt(textareaElem.closest("article").id);
-    this.postComment(value, postId);
+    this.postComment(postId);
   };
 
   handleClickLikeComment = (e) => {
