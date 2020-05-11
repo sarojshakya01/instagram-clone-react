@@ -21,7 +21,7 @@ class Carousel extends React.Component {
   renderDots = () => {
     const dots = this.props.photoList.map((dot, index) => {
       const myClass = index === this.state.currPhoto ? "dot current" : "dot";
-      return <div className={myClass}></div>;
+      return <div key={index} className={myClass}></div>;
     });
     return dots;
   };
