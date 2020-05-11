@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Header from "./Header";
-import Photo from "./Photo";
+import Photo from "./Photo/";
 import Description from "./Description/";
 import PostOption from "./PostOption";
 import PostFooter from "./PostFooter";
@@ -31,7 +31,9 @@ class Post extends React.Component {
           postBy: myPost.postby,
           location: myPost.location,
           postByPhoto: imgUrl + myPost.postbyphoto,
-          photo: imgUrl + myPost.photo,
+          photo: myPost.photo.map((photo) => {
+            return imgUrl + photo;
+          }),
           caption: { captionBy: myPost.postby, caption: myPost.caption },
           likes: myPost.likes,
           comments: myPost.comments.map((cmnt, index) => {

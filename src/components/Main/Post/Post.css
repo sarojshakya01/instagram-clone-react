@@ -155,44 +155,6 @@ a:visited {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.igpost-image {
-  touch-action: manipulation;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.igpost-image-bg {
-  background-color: #efefef;
-  background-color: rgba(var(--bb2, 239, 239, 239), 1);
-  display: block;
-  width: 100%;
-}
-
-.igpost-image-bg-content {
-  padding-bottom: 111.667%;
-  display: block;
-  overflow: hidden;
-}
-
-.igpost-image img {
-  object-fit: cover;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  user-select: none;
-  width: 100%;
-}
-
-.igpost-image-footer {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
 
 .igpost-option {
   height: 60px;

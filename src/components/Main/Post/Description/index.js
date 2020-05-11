@@ -207,7 +207,7 @@ class Description extends React.Component {
       loginUser,
     } = this.props.postDetails;
     const likedPost = likes.indexOf(loginUser) > -1;
-    debugger;
+
     return (
       <div className="igpost-description">
         <IconBar likedPost={likedPost} setLikePost={this.props.setLikePost} />
