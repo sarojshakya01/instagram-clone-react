@@ -102,10 +102,11 @@ class Description extends React.Component {
   handlePostComment = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      const { value } = e.target;
-      const postId = parseInt(e.currentTarget.closest("article").id);
-      this.postComment(value, postId);
+      if (e.target.value.trim() !== "") {
+        const { value } = e.target;
+        const postId = parseInt(e.currentTarget.closest("article").id);
+        this.postComment(value, postId);
+      }
     }
   };
 

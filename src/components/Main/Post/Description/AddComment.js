@@ -21,7 +21,9 @@ const AddComment = (props) => {
             disabled={!props.dataFetched}
           ></textarea>
           <button
-            disabled={props.value === "" || !props.dataFetched ? true : false}
+            disabled={
+              props.value.trim() === "" || !props.dataFetched ? true : false
+            }
             type="button"
             onClick={props.handlePostCommentBtn}
           >
