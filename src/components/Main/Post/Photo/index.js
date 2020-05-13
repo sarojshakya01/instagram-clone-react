@@ -11,7 +11,7 @@ const Photo = (props) => {
         className="igpost-image"
         role="button"
         tabIndex="0"
-        // onDoubleClick={props.setClickPost}
+        onDoubleClick={props.setClickPost}
       >
         <Carousel postBy={postBy} photoList={photo} />
         {/* <div className="igpost-image-bg">
