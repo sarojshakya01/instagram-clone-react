@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const ProfileMenu = (props) => {
   const { userId, profilePhoto } = props.profileInfo;
@@ -12,12 +13,16 @@ const ProfileMenu = (props) => {
   }
 
   return (
-    <div className="nav-icon profile" onClick={props.handleClick}>
-      <div className="nav-profile-container" style={style}></div>
-      <a href={"/" + userId + "/"}>
-        <img alt={userId + "'s Profile Pic"} src={profilePhoto} />
-      </a>
-    </div>
+    <>
+      <div className="nav-icon profile" onClick={props.handleClick}>
+        <div className="nav-profile-container" style={style}></div>
+
+        <Link to={"/" + userId + "/"}>
+          <img alt={userId + "'s Profile Pic"} src={profilePhoto} />
+        </Link>
+        <Router></Router>
+      </div>
+    </>
   );
 };
 

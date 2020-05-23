@@ -100,6 +100,13 @@ ul {
 .dark div.story-label,
 .dark .like-count-content button,
 .dark .search-result-userid,
+.dark.profile-page,
+.dark.profile-page .profile-setting h2,
+.dark.profile-page .profile-setting a > button,
+.dark.profile-page header section ul > li > span > span,
+.dark.profile-page header section ul > li > span,
+.dark.profile-page header section ul > li > a > span,
+.dark .intro,
 .dark a {
   color: #e6e6e6 !important;
   border-color: #e6e6e6 !important;

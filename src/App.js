@@ -2,7 +2,9 @@ import React from "react";
 import axios from "axios";
 import Nav from "./components/Nav/";
 import Main from "./components/Main/";
+import Profile from "./components/Profile/";
 import Footer from "./components/Footer/";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const loginUser = "sarojsh01"; // temp data
 const loginPassword = "12345"; // temp data
@@ -13,7 +15,7 @@ class App extends React.Component {
     this.state = {
       darkTheme: false,
       inbox: 0,
-      clickProfile: false,
+      clickNav: "home",
     };
     this.loginUser = {
       userId: "",
@@ -87,33 +89,72 @@ class App extends React.Component {
     sessionStorage.setItem("darkTheme", !this.state.darkTheme);
   };
 
-  setClickProfile = (e, value) => {
+  setClickProfile = (e) => {
     e.preventDefault();
-    this.setState({ clickProfile: value });
+    this.setState({ clickNav: "profile" });
+  };
+
+  handleClickNav = (e) => {
+    if (e.currentTarget.className.indexOf("home") > -1) {
+      this.setState({ clickNav: "home" });
+    } else if (e.currentTarget.className.indexOf("direct") > -1) {
+      this.setState({ clickNav: "direct" });
+    } else if (e.currentTarget.className.indexOf("explore") > -1) {
+      this.setState({ clickNav: "explore" });
+    } else if (e.currentTarget.className.indexOf("activity") > -1) {
+      this.setState({ clickNav: "activity" });
+    } else if (e.currentTarget.className.indexOf("profile") > -1) {
+      this.setState({ clickNav: "profile" });
+    } else {
+      this.setState({ clickNav: "" });
+    }
+    e.preventDefault();
   };
 
   render() {
     const darkLabel = this.state.darkTheme ? "ON" : "OFF";
 
     return (
-      <div className="root-inner">
-        <div></div>
-        <Main
-          darkTheme={this.state.darkTheme}
-          profileInfo={this.loginUser}
-          updateTheme={this.updateTheme}
-          setClickProfile={this.setClickProfile}
-        />
-        <Nav
-          label={darkLabel}
-          profileInfo={this.loginUser}
-          clickProfile={this.state.clickProfile}
-          inbox={this.state.inbox}
-          changeTheme={this.changeTheme}
-          setClickProfile={this.setClickProfile}
-        />
-        {window.innerWidth <= 1056 ? <Footer /> : null}
-      </div>
+      <Router>
+        <div className="root-inner">
+          {/* {this.state.clickNav === "profile" ? (
+            <Profile darkTheme={this.state.darkTheme} />
+          ) : (
+            <Main
+              darkTheme={this.state.darkTheme}
+              profileInfo={this.loginUser}
+              updateTheme={this.updateTheme}
+              setClickProfile={this.setClickProfile}
+            />
+          )} */}
+          <Switch>
+            {window.location.pathname === "/" ? (
+              <Route path="/">
+                <Main
+                  darkTheme={this.state.darkTheme}
+                  profileInfo={this.loginUser}
+                  updateTheme={this.updateTheme}
+                  setClickProfile={this.setClickProfile}
+                />
+                {window.innerWidth <= 1056 ? <Footer /> : null}
+              </Route>
+            ) : (
+              <Route path={window.location.pathname}>
+                <Profile darkTheme={this.state.darkTheme} />
+                <Footer />
+              </Route>
+            )}
+          </Switch>
+          <Nav
+            label={darkLabel}
+            profileInfo={this.loginUser}
+            clickNav={this.state.clickNav}
+            inbox={this.state.inbox}
+            changeTheme={this.changeTheme}
+            handleClickNav={this.handleClickNav}
+          />
+        </div>
+      </Router>
     );
   }
 }

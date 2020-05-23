@@ -16,9 +16,9 @@ const Nav = (props) => {
             <Search />
             <Icons
               profileInfo={props.profileInfo}
-              clickProfile={props.clickProfile}
+              clickNav={props.clickNav}
               inbox={props.inbox}
-              setClickProfile={props.setClickProfile}
+              handleClickNav={props.handleClickNav}
             />
           </div>
           <SwitchTheme changeTheme={props.changeTheme} label={props.label} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HomeMenu from "./HomeMenu";
 import DirectMenu from "./DirectMenu";
 import ExploreMenu from "./ExploreMenu";
@@ -7,75 +7,30 @@ import ProfileMenu from "./ProfileMenu";
 import "./Icons.css";
 
 const Icons = (props) => {
-  const [clickHome, setClickHome] = useState(true);
-  const [clickDirect, setClickDirect] = useState(false);
-  const [clickExplore, setClickExplore] = useState(false);
-  const [clickActivity, setClickActivity] = useState(false);
-  const [clickProfile, setClickProfile] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    if (e.currentTarget.className.indexOf("home") > -1) {
-      setClickHome(true);
-      setClickDirect(false);
-      setClickExplore(false);
-      setClickActivity(false);
-      setClickProfile(false);
-      props.setClickProfile(e, false);
-    } else if (e.currentTarget.className.indexOf("direct") > -1) {
-      setClickHome(false);
-      setClickDirect(true);
-      setClickExplore(false);
-      setClickActivity(false);
-      setClickProfile(false);
-      props.setClickProfile(e, false);
-    } else if (e.currentTarget.className.indexOf("explore") > -1) {
-      setClickHome(false);
-      setClickDirect(false);
-      setClickExplore(true);
-      setClickActivity(false);
-      setClickProfile(false);
-      props.setClickProfile(e, false);
-    } else if (e.currentTarget.className.indexOf("activity") > -1) {
-      setClickHome(false);
-      setClickDirect(false);
-      setClickExplore(false);
-      setClickActivity(true);
-      setClickProfile(false);
-      props.setClickProfile(e, false);
-    } else if (e.currentTarget.className.indexOf("profile") > -1) {
-      setClickHome(false);
-      setClickDirect(false);
-      setClickExplore(false);
-      setClickActivity(false);
-      setClickProfile(true);
-      props.setClickProfile(e, true);
-    } else {
-      setClickHome(false);
-      setClickDirect(false);
-      setClickExplore(false);
-      setClickActivity(false);
-      setClickProfile(false);
-      props.setClickProfile(e, false);
-    }
-  };
+  const clickHome = props.clickNav === "home";
+  const clickDirect = props.clickNav === "direct";
+  const clickExplore = props.clickNav === "explore";
+  const clickActivity = props.clickNav === "activity";
+  const clickProfile = props.clickNav === "profile";
 
   return (
     <div className="nav-icons-container">
       <div className="nav-icons-inner">
-        <HomeMenu click={clickHome} handleClick={handleClick} />
+        <HomeMenu click={clickHome} handleClick={props.handleClickNav} />
         <DirectMenu
           click={clickDirect}
-          handleClick={handleClick}
+          handleClick={props.handleClickNav}
           inbox={props.inbox}
         />
-        <ExploreMenu click={clickExplore} handleClick={handleClick} />
-        <ActivityMenu click={clickActivity} handleClick={handleClick} />
+        <ExploreMenu click={clickExplore} handleClick={props.handleClickNav} />
+        <ActivityMenu
+          click={clickActivity}
+          handleClick={props.handleClickNav}
+        />
         <ProfileMenu
-          click={props.clickProfile || clickProfile}
+          click={clickProfile}
+          handleClick={props.handleClickNav}
           profileInfo={props.profileInfo}
-          handleClick={handleClick}
         />
       </div>
     </div>

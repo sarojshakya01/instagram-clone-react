@@ -12,7 +12,7 @@ const uri = "mongodb://127.0.0.1:27017/";
 
 const mongocli = mongo.MongoClient;
 
-app.use(express.static("public"));
+// app.use(express.static("./build/"));
 app.use("/api", router);
 app.use(cors());
 app.use(bodyParser.json());
@@ -35,9 +35,9 @@ dbConnectionTest = () => {
   );
 };
 
-app.get("/", (request, response) => {
-  response.sendfile("./public/index.html");
-});
+// app.get("/", (request, response) => {
+//   response.sendfile("./build/index.html");
+// });
 
 app.get("/post", (request, response) => {
   const id = request.query.postId;
@@ -74,10 +74,12 @@ app.get("/post", (request, response) => {
 app.post("/user", (request, response) => {
   const id = request.body.params.userId;
   const pw = request.body.params.password;
+
   let query = {};
   if (id !== undefined && id.length > 0) {
     query = { userid: id, password: pw };
   }
+
   mongocli.connect(
     uri,
     {
@@ -101,11 +103,73 @@ app.post("/user", (request, response) => {
           followedby: 0,
           follows: 0,
           storydate: 0,
+          bio: 0,
         })
         .toArray((err, result) => {
           if (err) throw err;
           response.send(result);
           db.close;
+        });
+    }
+  );
+});
+
+app.get("/userDetails", (request, response) => {
+  const id = request.query.userId;
+
+  let query = {};
+  if (id !== undefined && id.length > 0) {
+    query = { userid: id };
+  }
+
+  mongocli.connect(
+    uri,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    (err, db) => {
+      if (err) throw err;
+
+      let dbobj = db.db("Instagram");
+      let userInfo;
+      dbobj
+        .collection("user")
+        .find(query)
+        .project({
+          _id: 0,
+          password: 0,
+          email: 0,
+          gender: 0,
+          country: 0,
+          createdate: 0,
+          storydate: 0,
+        })
+        .toArray((err, result) => {
+          if (err) throw err;
+
+          userInfo = result;
+
+          dbobj
+            .collection("post")
+            .find({ postby: id })
+            .project({
+              _id: 0,
+              postid: 0,
+              postby: 0,
+              postbyphoto: 0,
+              location: 0,
+              caption: 0,
+              likes: 0,
+              comments: 0,
+              posttime: 0,
+            })
+            .toArray((err, result) => {
+              if (err) throw err;
+              userInfo[0].posts = result;
+              response.send(userInfo);
+              db.close;
+            });
         });
     }
   );

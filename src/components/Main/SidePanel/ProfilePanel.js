@@ -11,7 +11,7 @@ const ProfilePanel = (props) => {
           role="button"
           tabIndex="0"
           onClick={(e) => {
-            props.setClickProfile(e, true);
+            props.setClickProfile(e);
           }}
         >
           <canvas height="60" width="60"></canvas>
@@ -23,7 +23,7 @@ const ProfilePanel = (props) => {
           <div
             className="profile-id"
             onClick={(e) => {
-              props.setClickProfile(e, true);
+              props.setClickProfile(e);
             }}
           >
             <a href={"/" + userId + "/"}>{userId}</a>

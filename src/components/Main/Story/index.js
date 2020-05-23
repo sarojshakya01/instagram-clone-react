@@ -9,6 +9,7 @@ class Story extends React.Component {
     this.state = {
       fetchedStory: false,
       stories: [],
+      storyIndex: 0,
     };
   }
 
@@ -16,12 +17,11 @@ class Story extends React.Component {
     const self = this;
     const imgUrl = "../../img/userdata/";
     const loginUser = "sarojsh01";
-    let tempStories = [];
 
     axios
       .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
       .then((response) => {
-        tempStories = response.data.map((myStory) => {
+        let tempStories = response.data.map((myStory) => {
           let story = {
             userId: myStory.userid,
             profilePhoto: imgUrl + myStory.profilephoto,
@@ -62,10 +62,40 @@ class Story extends React.Component {
 
   renderStories = () => {
     const { stories } = this.state;
-    const storyList = stories.map((story, index) => {
-      return <StoryIcon key={index} index={index} story={story} />;
-    });
+
+    let storyList = [];
+    const uptoIndex =
+      this.state.stories.length > this.state.storyIndex + 8
+        ? this.state.storyIndex + 8
+        : this.state.stories.length;
+
+    for (let i = this.state.storyIndex; i < uptoIndex; i++) {
+      const storyIcon = (
+        <StoryIcon
+          key={i}
+          index={i - this.state.storyIndex}
+          story={stories[i]}
+        />
+      );
+      storyList.push(storyIcon);
+    }
     return storyList;
+  };
+
+  handleNextStory = () => {
+    if (this.state.stories.length > this.state.storyIndex + 7) {
+      this.setState({
+        storyIndex: this.state.storyIndex + 4,
+      });
+    }
+  };
+
+  handlePrevStory = () => {
+    if (this.state.storyIndex > 3) {
+      this.setState({
+        storyIndex: this.state.storyIndex - 4,
+      });
+    }
   };
 
   render() {
@@ -86,6 +116,22 @@ class Story extends React.Component {
               <div className="story-inner-inner">{this.renderStories()}</div>
             </div>
           )}
+          {this.state.storyIndex > 3 ? (
+            <div
+              className={`slide-arrow slide-arrow-left`}
+              onClick={this.handlePrevStory}
+            >
+              <div className={`slide-arrow-icon slide-arrow-icon-left`}></div>
+            </div>
+          ) : null}
+          {this.state.stories.length > this.state.storyIndex + 7 ? (
+            <div
+              className={`slide-arrow slide-arrow-right`}
+              onClick={this.handleNextStory}
+            >
+              <div className={`slide-arrow-icon slide-arrow-icon-right`}></div>
+            </div>
+          ) : null}
         </div>
       </div>
     );

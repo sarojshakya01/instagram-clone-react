@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const homeIcon = {
   white:
@@ -13,11 +14,12 @@ const HomeMenu = (props) => {
   return (
     <div className="nav-icon home" onClick={props.handleClick}>
       <div>
-        <a href="/">
+        <Link to="/">
           <svg aria-label="Home" height="22" viewBox="0 0 48 48" width="22">
             <path clipRule="evenodd" d={icon} fillRule="evenodd"></path>
           </svg>
-        </a>
+        </Link>
+        <Router></Router>
       </div>
     </div>
   );

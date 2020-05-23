@@ -1,7 +1,7 @@
 import React from "react";
 
 const ResultRow = (props) => {
-  const {userId, profilePhoto, userName} = props.result
+  const { userId, profilePhoto, userName } = props.result;
 
   return (
     <a href={"/" + userId + "/"}>
