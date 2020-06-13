@@ -99,6 +99,7 @@ class App extends React.Component {
       this.setState({ clickNav: "home" });
     } else if (e.currentTarget.className.indexOf("direct") > -1) {
       this.setState({ clickNav: "direct" });
+      this.setState({ inbox: 0 });
     } else if (e.currentTarget.className.indexOf("explore") > -1) {
       this.setState({ clickNav: "explore" });
     } else if (e.currentTarget.className.indexOf("activity") > -1) {
