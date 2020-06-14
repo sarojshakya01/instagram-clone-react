@@ -134,7 +134,7 @@ class Post extends React.Component {
     this.handleLikePost(indexOfPostLiker === -1);
 
     // for quick fake response, update the state. Later, actual state will be updated from API response
-    indexOfPostLiker > 0
+    indexOfPostLiker > -1
       ? posts[postIndex].likes.splice(indexOfPostLiker, 1)
       : posts[postIndex].likes.push(loginUser);
 
