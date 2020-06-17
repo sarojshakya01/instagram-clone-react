@@ -8,6 +8,7 @@ class StoryPanel extends React.Component {
     this.state = {
       fetchedStory: false,
       stories: [],
+      watchAll: false,
     };
   }
 
@@ -61,10 +62,28 @@ class StoryPanel extends React.Component {
 
   renderStories = () => {
     const { stories } = this.state;
-    const storyList = stories.map((story, index) => {
-      return <StoryRow key={index} index={index} story={story} />;
-    });
-    return storyList;
+
+    if (this.state.watchAll) {
+      const { stories } = this.state;
+      const storyList = stories.map((story, index) => {
+        return <StoryRow key={index} index={index} story={story} />;
+      });
+      return storyList;
+    } else {
+      let storyList = [];
+      const uptoIndex =
+        this.state.stories.length > 8 ? 8 : this.state.stories.length;
+
+      for (let i = 0; i < uptoIndex; i++) {
+        const storyIcon = <StoryRow key={i} index={i} story={stories[i]} />;
+        storyList.push(storyIcon);
+      }
+      return storyList;
+    }
+  };
+
+  handleWatchAll = () => {
+    this.setState({ watchAll: !this.state.watchAll });
   };
 
   render() {
@@ -75,7 +94,12 @@ class StoryPanel extends React.Component {
             <div className="story-header-label-content">{"Stories"}</div>
           </div>
           <a className="story-watch-all" href="/#">
-            <div className="story-watch-all-content">{"Watch All"}</div>
+            <div
+              className="story-watch-all-content"
+              onClick={this.handleWatchAll}
+            >
+              {this.state.watchAll ? "Watch Unseen" : "Watch All"}
+            </div>
           </a>
         </div>
         <div className="story-body-container">

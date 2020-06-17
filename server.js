@@ -205,6 +205,7 @@ app.get("/search", (request, response) => {
           followedby: 0,
           follows: 0,
           storydate: 0,
+          bio: 0,
         })
         .toArray((err, result) => {
           if (err) throw err;

@@ -61,7 +61,7 @@
   align-content: stretch;
 }
 
-.viewall a {
+.viewall > a {
   background: 0 0;
   border: 0;
   color: #8e8e8e;

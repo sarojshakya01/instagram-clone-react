@@ -21,6 +21,7 @@ class Search extends React.Component {
 
   handleBlur = () => {
     this.setState({ clickSearch: false });
+    this.setState({ value: "" });
   };
 
   handleChange = (e) => {
