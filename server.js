@@ -261,6 +261,7 @@ app.get("/story", (request, response) => {
                 createdate: 0,
                 followedby: 0,
                 follows: 0,
+				bio: 0,
               })
               .toArray((err, result) => {
                 if (err) throw err;
