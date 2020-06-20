@@ -49,7 +49,7 @@ const Comment = (props) => {
         </a>{" "}
         <span className="comment-content">
           <span>
-            {mention.length > 0 ? (
+            {mention && mention.length > 0 ? (
               <a href={"/" + mention + "/"}>{"@" + mention}</a>
             ) : null}{" "}
             {comment}
