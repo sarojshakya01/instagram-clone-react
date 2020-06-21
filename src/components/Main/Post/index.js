@@ -63,11 +63,7 @@ class Post extends React.Component {
     };
 
     axios
-      .get(
-        "http://https://instagram2-saroj.herokuapp.com//post",
-        { params },
-        { timeout: 5000 }
-      )
+      .get("http://localhost:3001/post", { params }, { timeout: 5000 })
       .then((response) => {
         let posts = self.extractPosts(response);
         self.setState(() => ({
@@ -109,11 +105,7 @@ class Post extends React.Component {
     const self = this;
 
     axios
-      .post(
-        "http://https://instagram2-saroj.herokuapp.com//likePost",
-        { params },
-        { timeout: 5000 }
-      )
+      .post("http://localhost:3001/likePost", { params }, { timeout: 5000 })
       .then((response) => {
         let { posts } = { ...self.state };
         posts[self.currentPost].likes = response.data;

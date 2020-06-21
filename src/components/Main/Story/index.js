@@ -19,11 +19,7 @@ class Story extends React.Component {
     const loginUser = "sarojsh01";
 
     axios
-      .get(
-        "http://https://instagram2-saroj.herokuapp.com//story?userId=" +
-          loginUser,
-        { timeout: 5000 }
-      )
+      .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
       .then((response) => {
         let tempStories = response.data.map((myStory) => {
           let story = {

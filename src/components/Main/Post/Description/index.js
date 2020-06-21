@@ -73,11 +73,7 @@ class Description extends React.Component {
       const self = this;
 
       axios
-        .post(
-          "http://https://instagram2-saroj.herokuapp.com//addComment",
-          { params },
-          { timeout: 5000 }
-        )
+        .post("http://localhost:3001/addComment", { params }, { timeout: 5000 })
         .then((response) => {
           const { comments } = { ...self.state };
 
@@ -140,11 +136,7 @@ class Description extends React.Component {
 
     const self = this;
     axios
-      .post(
-        "http://https://instagram2-saroj.herokuapp.com//likeComment",
-        { params },
-        { timeout: 5000 }
-      )
+      .post("http://localhost:3001/likeComment", { params }, { timeout: 5000 })
       .then((response) => {
         let { comments } = { ...self.state };
         comments[commentId].likes = response.data;
@@ -186,7 +178,7 @@ class Description extends React.Component {
     const self = this;
     axios
       .post(
-        "http://https://instagram2-saroj.herokuapp.com//deleteComment",
+        "http://localhost:3001/deleteComment",
         { params },
         { timeout: 5000 }
       )

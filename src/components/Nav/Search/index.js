@@ -30,13 +30,9 @@ class Search extends React.Component {
     const imgUrl = "../../img/userdata/";
 
     axios
-      .get(
-        "http://https://instagram2-saroj.herokuapp.com//search?q=" +
-          e.target.value,
-        {
-          timeout: 5000,
-        }
-      )
+      .get("http://localhost:3001/search?q=" + e.target.value, {
+        timeout: 5000,
+      })
       .then((response) => {
         const results = response.data.map((elem) => {
           let result = {
