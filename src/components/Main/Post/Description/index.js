@@ -72,31 +72,31 @@ class Description extends React.Component {
       this.setState({ commentDataFetched: false });
       const self = this;
 
-      axios
-        .post("http://localhost:3001/addComment", { params }, { timeout: 5000 })
-        .then((response) => {
-          const { comments } = { ...self.state };
+      // axios
+      //   .post("http://localhost:3001/addComment", { params }, { timeout: 5000 })
+      //   .then((response) => {
+      //     const { comments } = { ...self.state };
 
-          const newComment = {
-            commentId: `${self.postId}_${comments.length}`,
-            commentBy: response.data.commentby,
-            mention: response.data.mention,
-            comment: response.data.comment,
-            likes: response.data.likes,
-          };
+      //     const newComment = {
+      //       commentId: `${self.postId}_${comments.length}`,
+      //       commentBy: response.data.commentby,
+      //       mention: response.data.mention,
+      //       comment: response.data.comment,
+      //       likes: response.data.likes,
+      //     };
 
-          comments.push(newComment);
-          self.setState({
-            comments,
-            textareaValue: "",
-            commentDataFetched: true,
-          });
-        })
-        .catch((err) => {
-          self.setState({
-            commentDataFetched: true,
-          });
-        });
+      //     comments.push(newComment);
+      //     self.setState({
+      //       comments,
+      //       textareaValue: "",
+      //       commentDataFetched: true,
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     self.setState({
+      //       commentDataFetched: true,
+      //     });
+      //   });
     }
   };
 
@@ -135,18 +135,18 @@ class Description extends React.Component {
     };
 
     const self = this;
-    axios
-      .post("http://localhost:3001/likeComment", { params }, { timeout: 5000 })
-      .then((response) => {
-        let { comments } = { ...self.state };
-        comments[commentId].likes = response.data;
-        self.setState({ comments });
-      })
-      .catch((err) => {
-        let { comments } = { ...self.state };
-        comments[commentId].likes = oldLikes;
-        self.setState({ comments });
-      });
+    // axios
+    //   .post("http://localhost:3001/likeComment", { params }, { timeout: 5000 })
+    //   .then((response) => {
+    //     let { comments } = { ...self.state };
+    //     comments[commentId].likes = response.data;
+    //     self.setState({ comments });
+    //   })
+    //   .catch((err) => {
+    //     let { comments } = { ...self.state };
+    //     comments[commentId].likes = oldLikes;
+    //     self.setState({ comments });
+    //   });
 
     // for quick fake response, update the state. Later, actual state will be updated from API response
     if (liked) {
@@ -176,21 +176,21 @@ class Description extends React.Component {
     };
 
     const self = this;
-    axios
-      .post(
-        "http://localhost:3001/deleteComment",
-        { params },
-        { timeout: 5000 }
-      )
-      .then((response) => {
-        if (response.data.length > 0) {
-          const newComments = self.extractComment(response);
-          self.setState({ comments: newComments });
-        }
-      })
-      .catch((err) => {
-        self.setState({ comments: oldComments });
-      });
+    // axios
+    //   .post(
+    //     "http://localhost:3001/deleteComment",
+    //     { params },
+    //     { timeout: 5000 }
+    //   )
+    //   .then((response) => {
+    //     if (response.data.length > 0) {
+    //       const newComments = self.extractComment(response);
+    //       self.setState({ comments: newComments });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     self.setState({ comments: oldComments });
+    //   });
 
     // for quick fake response, update the state. Later, actual state will be updated from API response
     comments.splice(commentId, 1);

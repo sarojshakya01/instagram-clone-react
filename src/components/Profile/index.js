@@ -21,26 +21,26 @@ class Profile extends React.Component {
       userId: window.location.pathname.replace("/", "").replace("/", ""),
     };
 
-    axios
-      .get("http://localhost:3001/userDetails", { params }, { timeout: 5000 })
-      .then((response) => {
-        if (response.data.length > 0) {
-          const user = [
-            {
-              userId: response.data[0].userid,
-              userName: response.data[0].username,
-              profilePhoto: imgUrl + response.data[0].profilephoto,
-              followedBy: response.data[0].followedby,
-              follows: response.data[0].follows,
-              bio: response.data[0].bio,
-              posts: response.data[0].posts,
-            },
-          ];
-          self.setState({
-            userInfo: user,
-          });
-        }
-      });
+    // axios
+    //   .get("http://localhost:3001/userDetails", { params }, { timeout: 5000 })
+    //   .then((response) => {
+    //     if (response.data.length > 0) {
+    //       const user = [
+    //         {
+    //           userId: response.data[0].userid,
+    //           userName: response.data[0].username,
+    //           profilePhoto: imgUrl + response.data[0].profilephoto,
+    //           followedBy: response.data[0].followedby,
+    //           follows: response.data[0].follows,
+    //           bio: response.data[0].bio,
+    //           posts: response.data[0].posts,
+    //         },
+    //       ];
+    //       self.setState({
+    //         userInfo: user,
+    //       });
+    //     }
+    //   });
   };
 
   render() {

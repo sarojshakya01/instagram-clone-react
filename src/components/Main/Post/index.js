@@ -62,21 +62,21 @@ class Post extends React.Component {
       postId: "",
     };
 
-    axios
-      .get("http://localhost:3001/post", { params }, { timeout: 5000 })
-      .then((response) => {
-        let posts = self.extractPosts(response);
-        self.setState(() => ({
-          posts: posts,
-          fetchedPost: true,
-        }));
-      })
-      .catch(() => {
-        self.setState(() => ({
-          posts: [],
-          fetchedPost: true,
-        }));
-      });
+    // axios
+    //   .get("http://localhost:3001/post", { params }, { timeout: 5000 })
+    //   .then((response) => {
+    //     let posts = self.extractPosts(response);
+    //     self.setState(() => ({
+    //       posts: posts,
+    //       fetchedPost: true,
+    //     }));
+    //   })
+    //   .catch(() => {
+    //     self.setState(() => ({
+    //       posts: [],
+    //       fetchedPost: true,
+    //     }));
+    //   });
   };
 
   componentDidUpdate = () => {
@@ -104,21 +104,21 @@ class Post extends React.Component {
 
     const self = this;
 
-    axios
-      .post("http://localhost:3001/likePost", { params }, { timeout: 5000 })
-      .then((response) => {
-        let { posts } = { ...self.state };
-        posts[self.currentPost].likes = response.data;
-        self.setState({
-          posts,
-        });
-      })
-      .catch(() => {
-        // roll back the changes
-        self.setState({
-          posts: self.prevPosts,
-        });
-      });
+    // axios
+    //   .post("http://localhost:3001/likePost", { params }, { timeout: 5000 })
+    //   .then((response) => {
+    //     let { posts } = { ...self.state };
+    //     posts[self.currentPost].likes = response.data;
+    //     self.setState({
+    //       posts,
+    //     });
+    //   })
+    //   .catch(() => {
+    //     // roll back the changes
+    //     self.setState({
+    //       posts: self.prevPosts,
+    //     });
+    //   });
   };
 
   setLikePost = (e) => {
