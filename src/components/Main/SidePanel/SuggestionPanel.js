@@ -17,46 +17,46 @@ class SuggestionPanel extends React.Component {
     const loginUser = "sarojsh01";
     let tempSuggestions = [];
 
-    // axios
-    //   .get("http://localhost:3001/suggestion?userId=" + loginUser, {
-    //     timeout: 5000,
-    //   })
-    //   .then((response) => {
-    //     let followedBy = response.data[0].followedby;
-    //     let follows = response.data[1].follows;
-    //     for (let i = 2; i < response.data.length; i++) {
-    //       let suggestion = {
-    //         userId: response.data[i].userid,
-    //         profilePhoto: imgUrl + response.data[i].profilephoto,
-    //         isFollowedBy:
-    //           followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
-    //         commonFollowedBy: [],
-    //       };
+    axios
+      .get("http://localhost:3001/suggestion?userId=" + loginUser, {
+        timeout: 5000,
+      })
+      .then((response) => {
+        let followedBy = response.data[0].followedby;
+        let follows = response.data[1].follows;
+        for (let i = 2; i < response.data.length; i++) {
+          let suggestion = {
+            userId: response.data[i].userid,
+            profilePhoto: imgUrl + response.data[i].profilephoto,
+            isFollowedBy:
+              followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
+            commonFollowedBy: [],
+          };
 
-    //       for (let j = 0; j < response.data[i].followedby.length; j++) {
-    //         if (follows.indexOf(response.data[i].followedby[j].userid) !== -1) {
-    //           suggestion.commonFollowedBy.push(
-    //             response.data[i].followedby[j].userid
-    //           );
-    //         }
-    //       }
+          for (let j = 0; j < response.data[i].followedby.length; j++) {
+            if (follows.indexOf(response.data[i].followedby[j].userid) !== -1) {
+              suggestion.commonFollowedBy.push(
+                response.data[i].followedby[j].userid
+              );
+            }
+          }
 
-    //       if (suggestion.commonFollowedBy.length > 0) {
-    //         tempSuggestions.push(suggestion);
-    //       }
-    //     }
+          if (suggestion.commonFollowedBy.length > 0) {
+            tempSuggestions.push(suggestion);
+          }
+        }
 
-    //     self.setState(() => ({
-    //       suggestions: tempSuggestions,
-    //       fetchedSuggestion: true,
-    //     }));
-    //   })
-    //   .catch((err) => {
-    //     // handle error
-    //     self.setState(() => ({
-    //       fetchedSuggestion: true,
-    //     }));
-    //   });
+        self.setState(() => ({
+          suggestions: tempSuggestions,
+          fetchedSuggestion: true,
+        }));
+      })
+      .catch((err) => {
+        // handle error
+        self.setState(() => ({
+          fetchedSuggestion: true,
+        }));
+      });
   };
 
   componentDidUpdate = () => {

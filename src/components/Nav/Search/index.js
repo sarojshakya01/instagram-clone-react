@@ -29,24 +29,24 @@ class Search extends React.Component {
     const self = this;
     const imgUrl = "../../img/userdata/";
 
-    // axios
-    //   .get("http://localhost:3001/search?q=" + e.target.value, {
-    //     timeout: 5000,
-    //   })
-    //   .then((response) => {
-    //     const results = response.data.map((elem) => {
-    //       let result = {
-    //         userId: elem.userid,
-    //         userName: elem.username,
-    //         profilePhoto: imgUrl + elem.profilephoto,
-    //       };
-    //       return result;
-    //     });
-    //     self.setState({ results: results, dataFetched: true });
-    //   })
-    //   .catch(() => {
-    //     self.setState({ results: [], dataFetched: true });
-    //   });
+    axios
+      .get("http://localhost:3001/search?q=" + e.target.value, {
+        timeout: 5000,
+      })
+      .then((response) => {
+        const results = response.data.map((elem) => {
+          let result = {
+            userId: elem.userid,
+            userName: elem.username,
+            profilePhoto: imgUrl + elem.profilephoto,
+          };
+          return result;
+        });
+        self.setState({ results: results, dataFetched: true });
+      })
+      .catch(() => {
+        self.setState({ results: [], dataFetched: true });
+      });
   };
 
   renderResults = (data) => {

@@ -18,29 +18,29 @@ class Story extends React.Component {
     const imgUrl = "../../img/userdata/";
     const loginUser = "sarojsh01";
 
-    // axios
-    //   .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
-    //   .then((response) => {
-    //     let tempStories = response.data.map((myStory) => {
-    //       let story = {
-    //         userId: myStory.userid,
-    //         profilePhoto: imgUrl + myStory.profilephoto,
-    //         storyDate: myStory.storydate,
-    //       };
-    //       return story;
-    //     });
+    axios
+      .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
+      .then((response) => {
+        let tempStories = response.data.map((myStory) => {
+          let story = {
+            userId: myStory.userid,
+            profilePhoto: imgUrl + myStory.profilephoto,
+            storyDate: myStory.storydate,
+          };
+          return story;
+        });
 
-    //     self.setState(() => ({
-    //       stories: tempStories,
-    //       fetchedStory: true,
-    //     }));
-    //   })
-    //   .catch((err) => {
-    //     // handle error
-    //     self.setState(() => ({
-    //       fetchedStory: true,
-    //     }));
-    //   });
+        self.setState(() => ({
+          stories: tempStories,
+          fetchedStory: true,
+        }));
+      })
+      .catch((err) => {
+        // handle error
+        self.setState(() => ({
+          fetchedStory: true,
+        }));
+      });
   };
 
   componentDidUpdate = () => {

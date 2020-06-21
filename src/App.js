@@ -32,26 +32,26 @@ class App extends React.Component {
       password: loginPassword,
     };
 
-    // axios
-    //   .post(
-    //     "http://localhost:3001/user",
-    //     {
-    //       params,
-    //     },
-    //     { timeout: 5000 }
-    //   )
-    //   .then((response) => {
-    //     self.loginUser.userId = response.data[0].userid;
-    //     self.loginUser.userName = response.data[0].username;
-    //     self.loginUser.profilePhoto = imgUrl + response.data[0].profilephoto;
+    axios
+      .post(
+        "http://localhost:3001/user",
+        {
+          params,
+        },
+        { timeout: 5000 }
+      )
+      .then((response) => {
+        self.loginUser.userId = response.data[0].userid;
+        self.loginUser.userName = response.data[0].username;
+        self.loginUser.profilePhoto = imgUrl + response.data[0].profilephoto;
 
-    //     self.setState(() => ({
-    //       inbox: 5,
-    //     }));
-    //   })
-    //   .catch(() => {
-    //     // handle the user not found case
-    //   });
+        self.setState(() => ({
+          inbox: 5,
+        }));
+      })
+      .catch(() => {
+        // handle the user not found case
+      });
 
     if (
       sessionStorage.getItem("darkTheme") !== undefined &&

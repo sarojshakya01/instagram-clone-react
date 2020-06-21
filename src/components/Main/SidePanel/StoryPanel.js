@@ -18,29 +18,29 @@ class StoryPanel extends React.Component {
     const loginUser = "sarojsh01";
     let tempStories = [];
 
-    // axios
-    //   .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
-    //   .then((response) => {
-    //     tempStories = response.data.map((myStory) => {
-    //       let story = {
-    //         userId: myStory.userid,
-    //         profilePhoto: imgUrl + myStory.profilephoto,
-    //         storyDate: myStory.storydate,
-    //       };
-    //       return story;
-    //     });
+    axios
+      .get("http://localhost:3001/story?userId=" + loginUser, { timeout: 5000 })
+      .then((response) => {
+        tempStories = response.data.map((myStory) => {
+          let story = {
+            userId: myStory.userid,
+            profilePhoto: imgUrl + myStory.profilephoto,
+            storyDate: myStory.storydate,
+          };
+          return story;
+        });
 
-    //     self.setState(() => ({
-    //       stories: tempStories,
-    //       fetchedStory: true,
-    //     }));
-    //   })
-    //   .catch((err) => {
-    //     //handle error
-    //     self.setState(() => ({
-    //       fetchedStory: true,
-    //     }));
-    //   });
+        self.setState(() => ({
+          stories: tempStories,
+          fetchedStory: true,
+        }));
+      })
+      .catch((err) => {
+        //handle error
+        self.setState(() => ({
+          fetchedStory: true,
+        }));
+      });
   };
 
   componentDidUpdate = () => {
