@@ -20,7 +20,11 @@
     "node": "12.x"
   },
   "scripts": {
-    "start": "concurrently \"node server/server.js\" \"react-scripts start\""
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "concurrently \"node server/server.js\" \"react-scripts start\""
   },
   "eslintConfig": {
     "extends": "react-app"
