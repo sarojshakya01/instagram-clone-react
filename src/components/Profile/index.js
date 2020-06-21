@@ -22,7 +22,11 @@ class Profile extends React.Component {
     };
 
     axios
-      .get("http://localhost:3001/userDetails", { params }, { timeout: 5000 })
+      .get(
+        "http://https://instagram2-saroj.herokuapp.com//userDetails",
+        { params },
+        { timeout: 5000 }
+      )
       .then((response) => {
         if (response.data.length > 0) {
           const user = [

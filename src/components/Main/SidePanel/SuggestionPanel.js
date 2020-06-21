@@ -18,9 +18,13 @@ class SuggestionPanel extends React.Component {
     let tempSuggestions = [];
 
     axios
-      .get("http://localhost:3001/suggestion?userId=" + loginUser, {
-        timeout: 5000,
-      })
+      .get(
+        "http://https://instagram2-saroj.herokuapp.com//suggestion?userId=" +
+          loginUser,
+        {
+          timeout: 5000,
+        }
+      )
       .then((response) => {
         let followedBy = response.data[0].followedby;
         let follows = response.data[1].follows;

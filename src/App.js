@@ -34,7 +34,7 @@ class App extends React.Component {
 
     axios
       .post(
-        "http://localhost:3001/user",
+        "http://https://instagram2-saroj.herokuapp.com//user",
         {
           params,
         },
