@@ -174,7 +174,7 @@ class Profile extends React.Component {
                         alt="post"
                         height="100%"
                         width="100%"
-                        src="../../img/userdata/sarojsh01_photo1.jpg"
+                        src="../../img/userdata/sarojsh01_photo2.jpg"
                       />
                     </div>
                     <div className="photo" height="293" width="293">
@@ -182,7 +182,7 @@ class Profile extends React.Component {
                         alt="post"
                         height="100%"
                         width="100%"
-                        src="../../img/userdata/sarojsh01_photo2.jpg"
+                        src="../../img/userdata/sarojsh01_photo3.jpg"
                       />
                     </div>
                   </div>
@@ -192,7 +192,7 @@ class Profile extends React.Component {
                         alt="post"
                         height="100%"
                         width="100%"
-                        src="../../img/userdata/sarojsh01_photo3.jpg"
+                        src="../../img/userdata/rebatov_photo1.jpg"
                       />
                     </div>
                     <div className="photo" height="293" width="293">
@@ -200,7 +200,7 @@ class Profile extends React.Component {
                         alt="post"
                         height="100%"
                         width="100%"
-                        src="../../img/userdata/rebatov_photo1.jpg"
+                        src="../../img/userdata/rebatov_photo2.jpg"
                       />
                     </div>
                     <div className="photo" height="293" width="293">

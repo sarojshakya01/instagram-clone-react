@@ -23,7 +23,7 @@ class SuggestionRow extends React.Component {
         commonFollowedBy[0] +
         " + " +
         (commonFollowedBy.length - 1).toString() +
-        "more";
+        " more";
     }
 
     const followLabel = this.props.suggestion.isFollowdBy
