@@ -7,14 +7,14 @@ const Header = (props) => {
     <header>
       <div className="igpost-postby-photo" tabIndex="0">
         <canvas height="42" width="42"></canvas>
-        <a href={"/" + postBy + "/"}>
+        <a href={"/" + postBy}>
           <img alt={postBy + " Profile Pic"} src={postByPhoto} />
         </a>
       </div>
       <div className="igpost-postby-label">
         <div className="igpost-postby-userid">
           <div className="igpost-postby-name-content">
-            <a href={"/" + postBy + "/"}>{postBy}</a>
+            <a href={"/" + postBy}>{postBy}</a>
           </div>
         </div>
         <div className="igpost-postby-location">

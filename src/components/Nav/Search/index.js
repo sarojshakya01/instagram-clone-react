@@ -30,7 +30,7 @@ class Search extends React.Component {
     const imgUrl = "../../img/userdata/";
 
     axios
-      .get("http://localhost:3001/search?q=" + e.target.value, {
+      .get("http://localhost:3001/api/search/user?q=" + e.target.value, {
         timeout: 5000,
       })
       .then((response) => {

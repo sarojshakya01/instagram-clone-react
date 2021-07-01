@@ -47,7 +47,7 @@ class SuggestionRow extends React.Component {
         <div className="suggestion-user-label">
           <div className="suggestion-user-id">
             <div className="suggestion-user-id-inner">
-              <a title={userId} href={"/" + userId + "/"}>
+              <a title={userId} href={"/" + userId}>
                 <div className="suggestion-user-id-inner-container">
                   <div className="suggestion-user-id-content-outer">
                     <div className="suggestion-user-id-content">{userId}</div>

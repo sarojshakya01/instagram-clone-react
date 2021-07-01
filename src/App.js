@@ -34,7 +34,7 @@ class App extends React.Component {
 
     axios
       .post(
-        "http://localhost:3001/user",
+        "http://localhost:3001/api/user/current",
         {
           params,
         },

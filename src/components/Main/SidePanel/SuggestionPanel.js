@@ -18,7 +18,7 @@ class SuggestionPanel extends React.Component {
     let tempSuggestions = [];
 
     axios
-      .get("http://localhost:3001/suggestion?userId=" + loginUser, {
+      .get("http://localhost:3001/api/suggestion/all?userId=" + loginUser, {
         timeout: 5000,
       })
       .then((response) => {

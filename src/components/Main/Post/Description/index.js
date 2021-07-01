@@ -51,9 +51,9 @@ class Description extends React.Component {
         mention:
           value.indexOf("@") > -1
             ? value.substring(
-                value.indexOf("@") + 1,
-                value.indexOf(" ") - value.indexOf("@")
-              )
+              value.indexOf("@") + 1,
+              value.indexOf(" ") - value.indexOf("@")
+            )
             : "",
         comment:
           value.indexOf("@") > -1
@@ -73,7 +73,7 @@ class Description extends React.Component {
       const self = this;
 
       axios
-        .post("http://localhost:3001/addComment", { params }, { timeout: 5000 })
+        .post("http://localhost:3001/api/post/add", { params }, { timeout: 5000 })
         .then((response) => {
           const { comments } = { ...self.state };
 
@@ -136,7 +136,7 @@ class Description extends React.Component {
 
     const self = this;
     axios
-      .post("http://localhost:3001/likeComment", { params }, { timeout: 5000 })
+      .post("http://localhost:3001/api/comment/like", { params }, { timeout: 5000 })
       .then((response) => {
         let { comments } = { ...self.state };
         comments[commentId].likes = response.data;
@@ -178,7 +178,7 @@ class Description extends React.Component {
     const self = this;
     axios
       .post(
-        "http://localhost:3001/deleteComment",
+        "http://localhost:3001/api/comment/delete",
         { params },
         { timeout: 5000 }
       )

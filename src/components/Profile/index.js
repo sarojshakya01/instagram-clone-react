@@ -22,7 +22,7 @@ class Profile extends React.Component {
     };
 
     axios
-      .get("http://localhost:3001/userDetails", { params }, { timeout: 5000 })
+      .get(`http://localhost:3001/api/user/${params.userId}`, { params }, { timeout: 5000 })
       .then((response) => {
         if (response.data.length > 0) {
           const user = [
