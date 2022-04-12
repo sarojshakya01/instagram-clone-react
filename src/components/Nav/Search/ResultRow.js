@@ -1,10 +1,10 @@
 import React from "react";
 
 const ResultRow = (props) => {
-  const { userId, profilePhoto, userName } = props.result;
+  const { userId, profilePhoto, userName, handleSelect } = props.result;
 
   return (
-    <a href={"/" + userId + "/"}>
+    <a href={"/" + userId} onClick={handleSelect}>
       <div className="search-result-row">
         <div className="search-result-photo">
           <canvas height="42" width="42"></canvas>

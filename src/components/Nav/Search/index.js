@@ -20,18 +20,13 @@ class Search extends React.Component {
     this.setState({ clickSearch: true });
   };
 
-  handleBlur = () => {
-    this.setState({ clickSearch: false });
-    this.setState({ value: "" });
-  };
-
   handleChange = (e) => {
     this.setState({ value: e.target.value, dataFetched: false });
     const self = this;
     const imgUrl = "../../img/userdata/";
 
     axios
-      .get(API_URL + "api/search/user?q=" + e.target.value, {
+      .get(API_URL + "search/user?q=" + e.target.value, {
         timeout: 5000,
       })
       .then((response) => {
@@ -53,20 +48,27 @@ class Search extends React.Component {
   renderResults = (data) => {
     const { results } = this.state;
     const resultRows = results.map((result, index) => {
-      return <ResultRow key={index} result={result} />;
+      return (
+        <ResultRow
+          key={index}
+          result={result}
+          handleSelect={this.handleSelect}
+        />
+      );
     });
     return resultRows;
+  };
+
+  handleSelect = (e) => {
+    this.setState({ clickSearch: false, value: "" });
+    e.preventDefault();
   };
 
   render() {
     const { clickSearch, dataFetched } = this.state;
 
     return (
-      <div
-        className="nav-search dark-off"
-        onClick={this.handleClick}
-        onBlur={this.handleBlur}
-      >
+      <div className="nav-search dark-off" onClick={this.handleClick}>
         <input
           id="nav-search-input"
           className="nav-search-input"

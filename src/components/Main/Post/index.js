@@ -106,7 +106,7 @@ class Post extends React.Component {
     const self = this;
 
     axios
-      .post(API_URL + "api/post/like", { params }, { timeout: 5000 })
+      .post(API_URL + "post/like", { params }, { timeout: 5000 })
       .then((response) => {
         let { posts } = { ...self.state };
         posts[self.currentPost].likes = response.data;

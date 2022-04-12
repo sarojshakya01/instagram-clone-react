@@ -74,7 +74,7 @@ class Description extends React.Component {
       const self = this;
 
       axios
-        .post(API_URL + "post/add", { params }, { timeout: 5000 })
+        .post(API_URL + "comment/add", { params }, { timeout: 5000 })
         .then((response) => {
           const { comments } = { ...self.state };
 
