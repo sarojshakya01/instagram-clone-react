@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ResultRow from "./ResultRow";
 import "./Search.css";
+import { API_URL } from "../../../config";
 
 class Search extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ class Search extends React.Component {
     const imgUrl = "../../img/userdata/";
 
     axios
-      .get("http://localhost:3001/api/search/user?q=" + e.target.value, {
+      .get(API_URL + "api/search/user?q=" + e.target.value, {
         timeout: 5000,
       })
       .then((response) => {

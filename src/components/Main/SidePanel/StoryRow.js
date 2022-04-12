@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class StoryRow extends React.Component {
   componentDidMount = () => {
@@ -59,10 +60,15 @@ class StoryRow extends React.Component {
         roundedDiff.toString() +
         (roundedDiff > 1 ? " years" : " yeaar") +
         " ago";
+    } else {
+      roundedDiff = Math.round(diffSec / 86400 / 365);
+      label =
+        roundedDiff.toString() +
+        (roundedDiff > 1 ? " years" : " yeaar") +
+        " ago";
     }
-
     return (
-      <div className="story-row">
+      <Link to={"/" + userId} className="story-row">
         <button>
           <div className="story-profile-photo" role="button" tabIndex="0">
             <canvas
@@ -85,7 +91,7 @@ class StoryRow extends React.Component {
             </div>
           </div>
         </button>
-      </div>
+      </Link>
     );
   }
 }

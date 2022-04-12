@@ -9,7 +9,7 @@ const FooterPanel = () => {
         <ul>
           <li>
             <a
-              href="/about-us/"
+              href="https://about.instagram.com"
               rel="nofollow noopener noreferrer"
               target="_blank"
             >
@@ -17,28 +17,40 @@ const FooterPanel = () => {
             </a>
           </li>
           <li>
-            <a href="/help/">{"Help"}</a>
+            <a href="https://help.instagram.com">{"Help"}</a>
           </li>
           <li>
-            <a href="/developer/">{"API"}</a>
+            <a
+              href="https://developers.facebook.com/docs/instagram"
+              rel="nofollow noopener noreferrer"
+              target="_blank"
+            >
+              {"API"}
+            </a>
           </li>
           <li>
-            <a href="/jobs/">{"Jobs"}</a>
+            <a href="https://about.instagram.com/about-us/careers">{"Jobs"}</a>
           </li>
           <li>
-            <a href="/privacy/">{"Privacy"}</a>
+            <a href="https://help.instagram.com/519522125107875/?maybe_redirect_pol=0">
+              {"Privacy"}
+            </a>
           </li>
           <li>
-            <a href="/terms/">{"Terms"}</a>
+            <a href="https://help.instagram.com/581066165581870">{"Terms"}</a>
           </li>
           <li>
-            <a href="/locations/">{"Locations"}</a>
+            <a href="https://www.instagram.com/explore/locations/">
+              {"Locations"}
+            </a>
           </li>
           <li>
-            <a href="/profiles/">{"Top Accounts"}</a>
+            <a href="https://www.instagram.com/directory/profiles/">
+              {"Top Accounts"}
+            </a>
           </li>
-          <li>
-            <span className="language">
+          <li className="language">
+            <span>
               {"Language"}
               <select>
                 <option value="en">{"English"}</option>

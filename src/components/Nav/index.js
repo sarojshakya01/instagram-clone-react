@@ -12,16 +12,15 @@ const Nav = (props) => {
       <div>
         <div className="nav dark-off">
           <div className="nav-menus">
-            <Brand darkTheme={props.label} />
+            <Brand />
             <Search />
             <Icons
-              profileInfo={props.profileInfo}
-              clickNav={props.clickNav}
+              activeNav={props.activeNav}
               inbox={props.inbox}
               handleClickNav={props.handleClickNav}
             />
           </div>
-          <SwitchTheme changeTheme={props.changeTheme} label={props.label} />
+          <SwitchTheme changeTheme={props.changeTheme} />
         </div>
       </div>
     </nav>

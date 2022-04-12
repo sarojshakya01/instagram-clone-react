@@ -1,8 +1,11 @@
 import React from "react";
 import axios from "axios";
 import SuggestionRow from "./SuggestionRow";
+import { API_URL } from "../../../config";
+import ThemeContext from "../../../contexts/ThemeContext";
 
 class SuggestionPanel extends React.Component {
+  static contextType = ThemeContext;
   constructor() {
     super();
     this.state = {
@@ -18,7 +21,7 @@ class SuggestionPanel extends React.Component {
     let tempSuggestions = [];
 
     axios
-      .get("http://localhost:3001/api/suggestion/all?userId=" + loginUser, {
+      .get(API_URL + "suggestion/all?userId=" + loginUser, {
         timeout: 5000,
       })
       .then((response) => {
@@ -60,7 +63,7 @@ class SuggestionPanel extends React.Component {
   };
 
   componentDidUpdate = () => {
-    if (this.props.darkTheme) {
+    if (this.context.theme === "dark") {
       const container = document.getElementById("side-panel-suggestion");
       const elems = container.parentElement.getElementsByClassName("dark-off");
 

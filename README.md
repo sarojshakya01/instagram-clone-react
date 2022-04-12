@@ -5,13 +5,13 @@ This project has basic structure of the original [Instagram](https://www.instagr
 ## How to run the projects?
 
 1. Clone or Download zip and extract the project.
-2. Host a mongodb server (either in cloud or in local machine) (If you host mongodb server on cloud, change the uri const in server.js file accordingly)
+2. Host a mongodb server (either in cloud or in local machine)
 3. Add database "Instagram" in your mongodb server
 4. Add collections "user" and "post" in "Instagram" database
 5. import respective data from data folder of project root directory (user.json and posts.json) or you can add your own data according to the schema of those json files.
 6. You can add your own image files in public/image/userdata folder of root directory
-7. Go to the project directory
-8. skip this step (run `node server.js` command from commant prompt (You should have already installed NodeJS in your machine))
+7. Go to the project directory and make a .env file from .sample.env and place your values
+8. run `node server.js` command from commant prompt (You should have already installed NodeJS in your machine))
 9. run `npm start` command in another instance of command prompt"
 10. install all required modules as suggested in the log of `npm start` command or you can mannually install required libraries and dev dependencies from package.json file untill the App runs in your browser
 

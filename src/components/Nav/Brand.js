@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import ThemeContext from "../../contexts/ThemeContext";
 
-const Brand = (props) => {
+const Brand = () => {
+  const { theme } = useContext(ThemeContext);
   let logo;
   let style = { width: "100%", height: "100%", margin: "0 0 0 0" };
 
   if (window.innerWidth > 604) {
     logo =
-      props.darkTheme === "ON"
+      theme === "dark"
         ? "../../img/instagram-white.png"
         : "../../img/instagram.png";
   } else {
     logo =
-      props.darkTheme === "ON"
+      theme === "dark"
         ? "../../img/instagram-logo-black.png"
         : "../../img/instagram-logo.png";
     style = { width: "11%", height: "11%", margin: "0 0 8px 0" };

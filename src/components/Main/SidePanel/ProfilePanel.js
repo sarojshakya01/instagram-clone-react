@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import ProfileContext from "../../../contexts/ProfileContext";
 
 const ProfilePanel = (props) => {
-  const { userId, userName, profilePhoto } = props.profileInfo;
+  const { userId, userName, profilePhoto } = useContext(ProfileContext);
 
   return (
     <div className="profile-container">
@@ -15,7 +16,7 @@ const ProfilePanel = (props) => {
           }}
         >
           <canvas height="60" width="60"></canvas>
-          <a href={"/" + userId + "/"}>
+          <a href={"/" + userId}>
             <img alt={userId + "'s Profile pic"} src={profilePhoto} />
           </a>
         </div>

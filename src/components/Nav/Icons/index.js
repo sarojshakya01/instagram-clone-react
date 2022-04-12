@@ -7,28 +7,28 @@ import ProfileMenu from "./ProfileMenu";
 import "./Icons.css";
 
 const Icons = (props) => {
-  const clickHome = props.clickNav === "home";
-  const clickDirect = props.clickNav === "direct";
-  const clickExplore = props.clickNav === "explore";
-  const clickActivity = props.clickNav === "activity";
-  const clickProfile = props.clickNav === "profile";
+  const homeActive = props.activeNav === "home";
+  const directActive = props.activeNav === "direct";
+  const exploreActive = props.activeNav === "explore";
+  const activityActive = props.activeNav === "activity";
+  const profileActive = props.activeNav === "profile";
 
   return (
     <div className="nav-icons-container">
       <div className="nav-icons-inner">
-        <HomeMenu click={clickHome} handleClick={props.handleClickNav} />
+        <HomeMenu click={homeActive} handleClick={props.handleClickNav} />
         <DirectMenu
-          click={clickDirect}
+          click={directActive}
           handleClick={props.handleClickNav}
           inbox={props.inbox}
         />
-        <ExploreMenu click={clickExplore} handleClick={props.handleClickNav} />
+        <ExploreMenu click={exploreActive} handleClick={props.handleClickNav} />
         <ActivityMenu
-          click={clickActivity}
+          click={activityActive}
           handleClick={props.handleClickNav}
         />
         <ProfileMenu
-          click={clickProfile}
+          click={profileActive}
           handleClick={props.handleClickNav}
           profileInfo={props.profileInfo}
         />

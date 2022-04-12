@@ -43,8 +43,6 @@ class Main extends React.Component {
     this.setState(() => ({
       style: myStyle,
     }));
-
-    this.props.updateTheme();
   };
 
   render() {
@@ -52,19 +50,14 @@ class Main extends React.Component {
       <main role="main" className="dark-off">
         {window.innerWidth <= 1056 ? (
           <section className="main-section">
-            <Story darkTheme={this.props.darkTheme} />
-            <Post darkTheme={this.props.darkTheme} />
+            <Story />
+            <Post />
           </section>
         ) : (
           <section className="main-section-2">
-            <Post darkTheme={this.props.darkTheme} />
+            <Post />
             <div className="post-story-gap"></div>
-            <SidePanel
-              darkTheme={this.props.darkTheme}
-              style={this.state.style}
-              profileInfo={this.props.profileInfo}
-              setClickProfile={this.props.setClickProfile}
-            />
+            <SidePanel style={this.state.style} />
           </section>
         )}
 

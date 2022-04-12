@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import StoryIcon from "./StoryIcon";
 import "./Story.css";
+import { API_URL } from "../../../config";
 
 class Story extends React.Component {
   constructor() {
@@ -19,7 +20,7 @@ class Story extends React.Component {
     const loginUser = "sarojsh01";
 
     axios
-      .get("http://localhost:3001/api/story/all?userId=" + loginUser, { timeout: 5000 })
+      .get(API_URL + "story/all?userId=" + loginUser, { timeout: 5000 })
       .then((response) => {
         let tempStories = response.data.map((myStory) => {
           let story = {
@@ -44,7 +45,7 @@ class Story extends React.Component {
   };
 
   componentDidUpdate = () => {
-    if (this.props.darkTheme) {
+    if (this.context.theme === "dark") {
       const container = document.getElementById("story-top");
       const elems = container.parentElement.getElementsByClassName("dark-off");
 

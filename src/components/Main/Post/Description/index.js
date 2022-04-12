@@ -6,6 +6,7 @@ import CaptionAndComment from "./CaptionAndComment";
 import TimeDateBar from "./TimeDateBar";
 import AddComment from "./AddComment";
 import "./Description.css";
+import { API_URL } from "../../../../config";
 
 class Description extends React.Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Description extends React.Component {
       const self = this;
 
       axios
-        .post("http://localhost:3001/api/post/add", { params }, { timeout: 5000 })
+        .post(API_URL + "post/add", { params }, { timeout: 5000 })
         .then((response) => {
           const { comments } = { ...self.state };
 
@@ -136,7 +137,7 @@ class Description extends React.Component {
 
     const self = this;
     axios
-      .post("http://localhost:3001/api/comment/like", { params }, { timeout: 5000 })
+      .post(API_URL + "comment/like", { params }, { timeout: 5000 })
       .then((response) => {
         let { comments } = { ...self.state };
         comments[commentId].likes = response.data;
@@ -178,7 +179,7 @@ class Description extends React.Component {
     const self = this;
     axios
       .post(
-        "http://localhost:3001/api/comment/delete",
+        API_URL + "comment/delete",
         { params },
         { timeout: 5000 }
       )

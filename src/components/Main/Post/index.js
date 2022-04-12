@@ -6,6 +6,7 @@ import Description from "./Description/";
 import PostOption from "./PostOption";
 import PostFooter from "./PostFooter";
 import "./Post.css";
+import { API_URL } from "../../../config";
 
 class Post extends React.Component {
   constructor() {
@@ -63,7 +64,7 @@ class Post extends React.Component {
     };
 
     axios
-      .get("http://localhost:3001/api/post/all", { params }, { timeout: 5000 })
+      .get(API_URL + "post/all", { params }, { timeout: 5000 })
       .then((response) => {
         let posts = self.extractPosts(response);
         self.setState(() => ({
@@ -80,7 +81,7 @@ class Post extends React.Component {
   };
 
   componentDidUpdate = () => {
-    if (this.props.darkTheme) {
+    if (this.context.theme === "dark") {
       const container = document.getElementById("igpost-main");
       const elems = container.getElementsByClassName("dark-off");
 
@@ -105,7 +106,7 @@ class Post extends React.Component {
     const self = this;
 
     axios
-      .post("http://localhost:3001/api/post/like", { params }, { timeout: 5000 })
+      .post(API_URL + "api/post/like", { params }, { timeout: 5000 })
       .then((response) => {
         let { posts } = { ...self.state };
         posts[self.currentPost].likes = response.data;

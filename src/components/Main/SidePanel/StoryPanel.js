@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import StoryRow from "./StoryRow";
+import { API_URL } from "../../../config";
 
 class StoryPanel extends React.Component {
   constructor() {
@@ -19,7 +20,7 @@ class StoryPanel extends React.Component {
     let tempStories = [];
 
     axios
-      .get("http://localhost:3001/api/story/all?userId=" + loginUser, { timeout: 5000 })
+      .get(API_URL + "story/all?userId=" + loginUser, { timeout: 5000 })
       .then((response) => {
         tempStories = response.data.map((myStory) => {
           let story = {
@@ -44,7 +45,7 @@ class StoryPanel extends React.Component {
   };
 
   componentDidUpdate = () => {
-    if (this.props.darkTheme) {
+    if (this.context.theme === "dark") {
       const container = document.getElementById("side-panel-story");
       const elems = container.parentElement.getElementsByClassName("dark-off");
 

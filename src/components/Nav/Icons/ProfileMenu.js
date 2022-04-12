@@ -1,8 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import ProfileContext from "../../../contexts/ProfileContext";
 
 const ProfileMenu = (props) => {
-  const { userId, profilePhoto } = props.profileInfo;
+  const { userId, profilePhoto } = useContext(ProfileContext);
 
   let style = {
     display: "none",
@@ -13,16 +14,13 @@ const ProfileMenu = (props) => {
   }
 
   return (
-    <>
-      <div className="nav-icon profile" onClick={props.handleClick}>
-        <div className="nav-profile-container" style={style}></div>
+    <div className="nav-icon profile" onClick={props.handleClick}>
+      <div className="nav-profile-container" style={style}></div>
 
-        <Link to={"/" + userId + "/"}>
-          <img alt={userId + "'s Profile Pic"} src={profilePhoto} />
-        </Link>
-        <Router></Router>
-      </div>
-    </>
+      <Link to={"/" + userId}>
+        <img alt={userId + "'s Profile Pic"} src={profilePhoto} />
+      </Link>
+    </div>
   );
 };
 

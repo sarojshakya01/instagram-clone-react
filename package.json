@@ -14,14 +14,15 @@
     "mongodb": "^3.5.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.1"
   },
   "engines": {
     "node": "12.x"
   },
   "scripts": {
-    "start": "concurrently \"cd server && node server.js\" \"set PORT=3000 && react-scripts start\""
+    "startboth": "concurrently \"cd server && node server.js\" \"set PORT=3000 && react-scripts start\"",
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
