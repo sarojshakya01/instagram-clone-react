@@ -64,6 +64,10 @@ class Search extends React.Component {
     e.preventDefault();
   };
 
+  handleBlur = (e) => {
+    this.setState({ clickSearch: false, value: "", results: [] });
+  };
+
   render() {
     const { clickSearch, dataFetched } = this.state;
 
