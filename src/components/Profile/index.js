@@ -42,6 +42,9 @@ class Profile extends React.Component {
             userInfo: user,
           });
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -61,8 +64,7 @@ class Profile extends React.Component {
     // }
     if (this.state.userInfo.length === 0) return null;
 
-    const { userId, userName, profilePhoto, followedBy, follows, bio, posts } =
-      this.state.userInfo[0];
+    const { userId, userName, profilePhoto, followedBy, follows, bio, posts } = this.state.userInfo[0];
 
     // if (posts[0] && posts[0].photo[0])
     // posts[0].photo[0]
@@ -73,19 +75,8 @@ class Profile extends React.Component {
             <div className="profile-photo">
               <div className="profile-photo-inner">
                 <div className="profile-photo-content">
-                  <button
-                    title={
-                      this.context.userId === userId ? "Change Profile Pic" : ""
-                    }
-                  >
-                    <img
-                      alt={
-                        this.context.userId === userId
-                          ? "Change Profile Pic"
-                          : ""
-                      }
-                      src={profilePhoto}
-                    />
+                  <button title={this.context.userId === userId ? "Change Profile Pic" : ""}>
+                    <img alt={this.context.userId === userId ? "Change Profile Pic" : ""} src={profilePhoto} />
                   </button>
                 </div>
               </div>
@@ -100,18 +91,8 @@ class Profile extends React.Component {
                     </a>
                     <div className="setting-icon">
                       <button type="button">
-                        <svg
-                          aria-label="Options"
-                          fill="#262626"
-                          height="24"
-                          viewBox="0 0 48 48"
-                          width="24"
-                        >
-                          <path
-                            clipRule="evenodd"
-                            d={settingIcon}
-                            fillRule="evenodd"
-                          ></path>
+                        <svg aria-label="Options" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                          <path clipRule="evenodd" d={settingIcon} fillRule="evenodd"></path>
                         </svg>
                       </button>
                     </div>
@@ -170,55 +151,25 @@ class Profile extends React.Component {
                     <div className="content-row">
                       {posts[0] ? (
                         <div className="photo" height="293" width="293">
-                          <img
-                            alt="post"
-                            height="100%"
-                            width="100%"
-                            src={`${imgUrl}${posts[0].photo[0]}`}
-                          />
+                          <img alt="post" height="100%" width="100%" src={`${imgUrl}${posts[0].photo[0]}`} />
                         </div>
                       ) : null}
                       <div className="photo" height="293" width="293">
-                        <img
-                          alt="post"
-                          height="100%"
-                          width="100%"
-                          src="../../img/userdata/sarojsh01_photo2.jpg"
-                        />
+                        <img alt="post" height="100%" width="100%" src="../../img/userdata/sarojsh01_photo2.jpg" />
                       </div>
                       <div className="photo" height="293" width="293">
-                        <img
-                          alt="post"
-                          height="100%"
-                          width="100%"
-                          src="../../img/userdata/sarojsh01_photo3.jpg"
-                        />
+                        <img alt="post" height="100%" width="100%" src="../../img/userdata/sarojsh01_photo3.jpg" />
                       </div>
                     </div>
                     <div className="content-row">
                       <div className="photo" height="293" width="293">
-                        <img
-                          alt="post"
-                          height="100%"
-                          width="100%"
-                          src="../../img/userdata/rebatov_photo1.jpg"
-                        />
+                        <img alt="post" height="100%" width="100%" src="../../img/userdata/rebatov_photo1.jpg" />
                       </div>
                       <div className="photo" height="293" width="293">
-                        <img
-                          alt="post"
-                          height="100%"
-                          width="100%"
-                          src="../../img/userdata/rebatov_photo2.jpg"
-                        />
+                        <img alt="post" height="100%" width="100%" src="../../img/userdata/rebatov_photo2.jpg" />
                       </div>
                       <div className="photo" height="293" width="293">
-                        <img
-                          alt="post"
-                          height="100%"
-                          width="100%"
-                          src="../../img/userdata/bidhan.sthapit_photo1.jpg"
-                        />
+                        <img alt="post" height="100%" width="100%" src="../../img/userdata/bidhan.sthapit_photo1.jpg" />
                       </div>
                     </div>
                   </div>

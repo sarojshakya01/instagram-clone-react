@@ -31,16 +31,13 @@ class SuggestionPanel extends React.Component {
           let suggestion = {
             userId: response.data[i].userid,
             profilePhoto: imgUrl + response.data[i].profilephoto,
-            isFollowedBy:
-              followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
+            isFollowedBy: followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
             commonFollowedBy: [],
           };
 
           for (let j = 0; j < response.data[i].followedby.length; j++) {
             if (follows.indexOf(response.data[i].followedby[j].userid) !== -1) {
-              suggestion.commonFollowedBy.push(
-                response.data[i].followedby[j].userid
-              );
+              suggestion.commonFollowedBy.push(response.data[i].followedby[j].userid);
             }
           }
 
@@ -55,10 +52,43 @@ class SuggestionPanel extends React.Component {
         }));
       })
       .catch((err) => {
-        // handle error
-        self.setState(() => ({
-          fetchedSuggestion: true,
-        }));
+        axios
+          .get("/api/suggestion/all.json?userId=" + loginUser, {
+            timeout: 5000,
+          })
+          .then((response) => {
+            let followedBy = response.data[0].followedby;
+            let follows = response.data[1].follows;
+            for (let i = 2; i < response.data.length; i++) {
+              let suggestion = {
+                userId: response.data[i].userid,
+                profilePhoto: imgUrl + response.data[i].profilephoto,
+                isFollowedBy: followedBy.indexOf(response.data[i].userid) === -1 ? false : true,
+                commonFollowedBy: [],
+              };
+
+              for (let j = 0; j < response.data[i].followedby.length; j++) {
+                if (follows.indexOf(response.data[i].followedby[j].userid) !== -1) {
+                  suggestion.commonFollowedBy.push(response.data[i].followedby[j].userid);
+                }
+              }
+
+              if (suggestion.commonFollowedBy.length > 0) {
+                tempSuggestions.push(suggestion);
+              }
+            }
+
+            self.setState(() => ({
+              suggestions: tempSuggestions,
+              fetchedSuggestion: true,
+            }));
+          })
+          .catch((err) => {
+            // handle error
+            self.setState(() => ({
+              fetchedSuggestion: true,
+            }));
+          });
       });
   };
 
@@ -83,9 +113,7 @@ class SuggestionPanel extends React.Component {
     const { suggestions } = this.state;
 
     const suggestionList = suggestions.slice(0, 3).map((suggestion, index) => {
-      return (
-        <SuggestionRow key={index} index={index} suggestion={suggestion} />
-      );
+      return <SuggestionRow key={index} index={index} suggestion={suggestion} />;
     });
     return suggestionList;
   };
@@ -95,9 +123,7 @@ class SuggestionPanel extends React.Component {
       <div id="side-panel-suggestion" className="suggestion-container dark-off">
         <div className="suggestion-header">
           <div className="suggestion-header-label">
-            <div className="suggestion-header-label-content">
-              {"Suggestions For You"}
-            </div>
+            <div className="suggestion-header-label-content">{"Suggestions For You"}</div>
           </div>
           <a className="suggestion-see-all" href="/explore/people/">
             <div className="suggestion-see-all-content">{"See All"}</div>
@@ -109,12 +135,7 @@ class SuggestionPanel extends React.Component {
               <div className="suggestion-body">
                 {!this.state.fetchedSuggestion ? (
                   <div className="story-loader">
-                    <img
-                      alt="Loading..."
-                      src="../../img/loader.gif"
-                      height="32"
-                      width="32"
-                    />
+                    <img alt="Loading..." src="../../img/loader.gif" height="32" width="32" />
                   </div>
                 ) : (
                   this.renderSuggestions()

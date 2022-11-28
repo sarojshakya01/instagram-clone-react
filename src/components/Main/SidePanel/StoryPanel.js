@@ -37,10 +37,29 @@ class StoryPanel extends React.Component {
         }));
       })
       .catch((err) => {
-        //handle error
-        self.setState(() => ({
-          fetchedStory: true,
-        }));
+        axios
+          .get("/api/story/all.json?userId=" + loginUser, { timeout: 5000 })
+          .then((response) => {
+            tempStories = response.data.map((myStory) => {
+              let story = {
+                userId: myStory.userid,
+                profilePhoto: imgUrl + myStory.profilephoto,
+                storyDate: myStory.storydate,
+              };
+              return story;
+            });
+
+            self.setState(() => ({
+              stories: tempStories,
+              fetchedStory: true,
+            }));
+          })
+          .catch((err) => {
+            //handle error
+            self.setState(() => ({
+              fetchedStory: true,
+            }));
+          });
       });
   };
 
@@ -72,8 +91,7 @@ class StoryPanel extends React.Component {
       return storyList;
     } else {
       let storyList = [];
-      const uptoIndex =
-        this.state.stories.length > 8 ? 8 : this.state.stories.length;
+      const uptoIndex = this.state.stories.length > 8 ? 8 : this.state.stories.length;
 
       for (let i = 0; i < uptoIndex; i++) {
         const storyIcon = <StoryRow key={i} index={i} story={stories[i]} />;
@@ -95,10 +113,7 @@ class StoryPanel extends React.Component {
             <div className="story-header-label-content">{"Stories"}</div>
           </div>
           <a className="story-watch-all" href="/#">
-            <div
-              className="story-watch-all-content"
-              onClick={this.handleWatchAll}
-            >
+            <div className="story-watch-all-content" onClick={this.handleWatchAll}>
               {this.state.watchAll ? "Watch Unseen" : "Watch All"}
             </div>
           </a>
@@ -108,12 +123,7 @@ class StoryPanel extends React.Component {
             <div className="story-body-inner">
               {!this.state.fetchedStory ? (
                 <div className="story-loader">
-                  <img
-                    alt="Loading..."
-                    src="../../img/loader.gif"
-                    height="32"
-                    width="32"
-                  />
+                  <img alt="Loading..." src="../../img/loader.gif" height="32" width="32" />
                 </div>
               ) : (
                 <div className="story-body">{this.renderStories()}</div>

@@ -73,10 +73,21 @@ class Post extends React.Component {
         }));
       })
       .catch(() => {
-        self.setState(() => ({
-          posts: [],
-          fetchedPost: true,
-        }));
+        axios
+          .get("/api/post/all.json", { params }, { timeout: 5000 })
+          .then((response) => {
+            let posts = self.extractPosts(response);
+            self.setState(() => ({
+              posts: posts,
+              fetchedPost: true,
+            }));
+          })
+          .catch(() => {
+            self.setState(() => ({
+              posts: [],
+              fetchedPost: true,
+            }));
+          });
       });
   };
 
@@ -135,9 +146,7 @@ class Post extends React.Component {
     this.handleLikePost(indexOfPostLiker === -1);
 
     // for quick fake response, update the state. Later, actual state will be updated from API response
-    indexOfPostLiker > -1
-      ? posts[postIndex].likes.splice(indexOfPostLiker, 1)
-      : posts[postIndex].likes.push(loginUser);
+    indexOfPostLiker > -1 ? posts[postIndex].likes.splice(indexOfPostLiker, 1) : posts[postIndex].likes.push(loginUser);
 
     this.setState({
       posts,
@@ -190,10 +199,7 @@ class Post extends React.Component {
         <article key={index} className="igpost dark-off" id={index}>
           <Header postByInfo={postByInfo} />
           <Photo photo={postedPhoto} setClickPost={this.setClickPost} />
-          <Description
-            postDetails={postDetails}
-            setLikePost={this.setLikePost}
-          />
+          <Description postDetails={postDetails} setLikePost={this.setLikePost} />
           <PostOption />
         </article>
       );

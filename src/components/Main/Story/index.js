@@ -37,10 +37,29 @@ class Story extends React.Component {
         }));
       })
       .catch((err) => {
-        // handle error
-        self.setState(() => ({
-          fetchedStory: true,
-        }));
+        axios
+          .get("/story/all.json?userId=" + loginUser, { timeout: 5000 })
+          .then((response) => {
+            let tempStories = response.data.map((myStory) => {
+              let story = {
+                userId: myStory.userid,
+                profilePhoto: imgUrl + myStory.profilephoto,
+                storyDate: myStory.storydate,
+              };
+              return story;
+            });
+
+            self.setState(() => ({
+              stories: tempStories,
+              fetchedStory: true,
+            }));
+          })
+          .catch((err) => {
+            // handle error
+            self.setState(() => ({
+              fetchedStory: true,
+            }));
+          });
       });
   };
 
@@ -65,19 +84,10 @@ class Story extends React.Component {
     const { stories } = this.state;
 
     let storyList = [];
-    const uptoIndex =
-      this.state.stories.length > this.state.storyIndex + 8
-        ? this.state.storyIndex + 8
-        : this.state.stories.length;
+    const uptoIndex = this.state.stories.length > this.state.storyIndex + 8 ? this.state.storyIndex + 8 : this.state.stories.length;
 
     for (let i = this.state.storyIndex; i < uptoIndex; i++) {
-      const storyIcon = (
-        <StoryIcon
-          key={i}
-          index={i - this.state.storyIndex}
-          story={stories[i]}
-        />
-      );
+      const storyIcon = <StoryIcon key={i} index={i - this.state.storyIndex} story={stories[i]} />;
       storyList.push(storyIcon);
     }
     return storyList;
@@ -105,12 +115,7 @@ class Story extends React.Component {
         <div className="stories">
           {!this.state.fetchedStory ? (
             <div className="story-loader">
-              <img
-                alt="Loading..."
-                src="../../img/loader.gif"
-                height="32"
-                width="32"
-              />
+              <img alt="Loading..." src="../../img/loader.gif" height="32" width="32" />
             </div>
           ) : (
             <div className="story-inner">
@@ -118,18 +123,12 @@ class Story extends React.Component {
             </div>
           )}
           {this.state.storyIndex > 3 ? (
-            <div
-              className={`slide-arrow slide-arrow-left`}
-              onClick={this.handlePrevStory}
-            >
+            <div className={`slide-arrow slide-arrow-left`} onClick={this.handlePrevStory}>
               <div className={`slide-arrow-icon slide-arrow-icon-left`}></div>
             </div>
           ) : null}
           {this.state.stories.length > this.state.storyIndex + 7 ? (
-            <div
-              className={`slide-arrow slide-arrow-right`}
-              onClick={this.handleNextStory}
-            >
+            <div className={`slide-arrow slide-arrow-right`} onClick={this.handleNextStory}>
               <div className={`slide-arrow-icon slide-arrow-icon-right`}></div>
             </div>
           ) : null}

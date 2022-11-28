@@ -53,6 +53,26 @@ class App extends React.Component {
       })
       .catch(() => {
         // handle the user not found case
+        axios
+          .get(
+            "/api/user/current.json",
+            {
+              params,
+            },
+            { timeout: 5000 }
+          )
+          .then((response) => {
+            self.loginUser.userId = response.data[0].userid;
+            self.loginUser.userName = response.data[0].username;
+            self.loginUser.profilePhoto = imgUrl + response.data[0].profilephoto;
+
+            self.setState(() => ({
+              inbox: 5,
+            }));
+          })
+          .catch(() => {
+            // handle the user not found case
+          });
       });
   };
 
@@ -74,10 +94,7 @@ class App extends React.Component {
 
   changeTheme = () => {
     this.setState({ theme: this.state.theme === "dark" ? "light" : "dark" });
-    sessionStorage.setItem(
-      "theme",
-      this.state.theme === "dark" ? "light" : "dark"
-    );
+    sessionStorage.setItem("theme", this.state.theme === "dark" ? "light" : "dark");
   };
 
   handleClickNav = (e) => {
@@ -111,12 +128,7 @@ class App extends React.Component {
                 <Route exact path="/:userId" component={Profile} />
               </Switch>
               {window.innerWidth <= 1056 ? <Footer /> : null}
-              <Nav
-                activeNav={this.state.activeNav}
-                inbox={this.state.inbox}
-                changeTheme={this.changeTheme}
-                handleClickNav={this.handleClickNav}
-              />
+              <Nav activeNav={this.state.activeNav} inbox={this.state.inbox} changeTheme={this.changeTheme} handleClickNav={this.handleClickNav} />
             </ProfileContext.Provider>
           </ThemeContext.Provider>
         </div>
