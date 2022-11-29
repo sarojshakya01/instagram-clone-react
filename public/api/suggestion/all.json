@@ -1,0 +1,128 @@
+[
+  {
+    "followedby": ["pooza_singh91", "bidhan.sthapit", "rebatov", "elna_stha", "ukg_ummesh", "_thehasinaaykahs_", "rajeshhamal", "paraskhadka77"]
+  },
+  {
+    "follows": ["pooza_singh91", "bidhan.sthapit", "rebatov", "elna_stha", "_thehasinaaykahs_", "ukg_umesh", "shrinkhala_", "rajeshhamal", "paraskhadka77"]
+  },
+  {
+    "userid": "sandeep_lamichhane25",
+    "username": "Sandeep Lamichhane",
+    "profilephoto": "sandeep_lamichhane25_profilephoto.jpg",
+    "followedby": [
+      {
+        "userid": "rebatov"
+      },
+      {
+        "userid": "elna_Stha"
+      },
+      {
+        "userid": "bidhan.sthapit"
+      },
+      {
+        "userid": "ukg_umesh"
+      },
+      {
+        "userid": "_thehasinaaykahs_"
+      },
+      {
+        "userid": "pooza_singh91"
+      },
+      {
+        "userid": "shrinkhala_"
+      },
+      {
+        "userid": "rajeshhamal"
+      },
+      {
+        "userid": "rabi.lamichhane"
+      },
+      {
+        "userid": "paraskhadka77"
+      },
+      {
+        "userid": "baburam.bhattarai"
+      }
+    ]
+  },
+  {
+    "userid": "rabi.lamichhane",
+    "username": "Rabi Lamichhane",
+    "profilephoto": "rabi.lamichhane_profilephoto.jpg",
+    "followedby": [
+      {
+        "userid": "rebatov"
+      },
+      {
+        "userid": "elna_Stha"
+      },
+      {
+        "userid": "bidhan.sthapit"
+      },
+      {
+        "userid": "ukg_umesh"
+      },
+      {
+        "userid": "_thehasinaaykahs_"
+      },
+      {
+        "userid": "pooza_singh91"
+      },
+      {
+        "userid": "shrinkhala_"
+      },
+      {
+        "userid": "sandeep_lamichhane25"
+      },
+      {
+        "userid": "rajeshhamal"
+      },
+      {
+        "userid": "paraskhadka77"
+      },
+      {
+        "userid": "baburam.bhattarai"
+      }
+    ]
+  },
+  {
+    "userid": "baburam.bhattarai",
+    "username": "Baburam Bhattarai",
+    "profilephoto": "baburam.bhattarai_profilephoto.jpg",
+    "followedby": [
+      {
+        "userid": "rebatov"
+      },
+      {
+        "userid": "elna_Stha"
+      },
+      {
+        "userid": "bidhan.sthapit"
+      },
+      {
+        "userid": "ukg_umesh"
+      },
+      {
+        "userid": "_thehasinaaykahs_"
+      },
+      {
+        "userid": "pooza_singh91"
+      },
+      {
+        "userid": "shrinkhala_"
+      },
+      {
+        "userid": "sandeep_lamichhane25"
+      },
+      {
+        "userid": "rajeshhamal"
+      },
+      {
+        "userid": "rabi.lamichhane"
+      },
+      {
+        "userid": "paraskhadka77"
+      }
+    ]
+  }
+]
